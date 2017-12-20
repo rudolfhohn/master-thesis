@@ -1,0 +1,30 @@
+% !TEX root = ../main.tex
+% Chapter Experimental setup
+
+\chapter{Experimental setup} % Main chapter title
+
+\label{Chapter3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+This chapter reviews the different experiments undertaken during this thesis. The goal of these experiments is to measure the effectiveness of more complex models against simple ones. All models are trained with the Cornell Movie Dialogs corpus.
+
+Technologies
+Keras / TensorFlow / word2vec pretrained
+
+Data
+Cornell-movie-dialogs / fr-en translate DB / Enron
+
+\section{Different architecture for the same purpose}
+The general purpose of the chatbot is to learn how to converse with other humans and to replicate the personnality of a given character from the movie dialogs. Thus, the training is done in two phases, namely the training, based on all the conversations, and the fine-tuning, based only on the conversations where the chosen character is answering. Other features like the gender of the character speaking first might lead to better results.
+
+The model's architecture follows the Sequence-to-Sequence model for a translation problem. Instead of translating from a language to another, the model ``translates'' the question into an answer, since the input and output have the same form in both cases.
+
+\section{Tensorflow and the NMT tutorial}
+Explain what is tensorflow, why is it worth usable (calculating and derivating all the backpropagation, etc.), the idea underlying TF (graphs, tensors, etc.), what is Keras, and how it was bad to use it for chatbots (non-sparse matrix for the target output words and cross-entropy loss)
+How does the NMT tutorial helps this thesis, what is it used for, what are the different parameters
+
+\textbf{Does the LSTM cell in TensorFlow has the forget gate or not ?}
+
+1503.02364: two weeks of training on one Tesla K40 (4.29 TFlops, M4000 2.57 TFlops, Titan V 110 TFlops) for a huge model (1k hidden states for both encoder/decoder, 620 vector space word2vec, sgd, mini-batch, vocab 40k)
+
+\section{Hardware doing the calculations}
+First I tried on Baobab, but OS too old and the server crashed while the admin was on vacations. Then, thanks to a grant of 300 CHF offered by hepia, I was able to use a dedicated Nvidia Quadro M4000 on paperspace and do all the training with it.

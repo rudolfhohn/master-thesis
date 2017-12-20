@@ -20,7 +20,7 @@
 # *.pdf
 
 ## Generated if empty string is given at "Please type another file name for output:"
-.pdf
+main.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
@@ -218,3 +218,15 @@ TSWLatexianTemp*
 
 # expex forward references with \gathertags
 *-tags.tex
+# End of https://www.gitignore.io/api/latex
+
+# Template overleaf origin files
+ChapterBase.tex
+ChapterTemplate.tex
+AppendixA.tex
+AppendixTemplate.tex
+example.bib
+
+.DS_Store
+
+
