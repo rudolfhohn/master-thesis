@@ -61,6 +61,9 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{bm}
+\usepackage[overload]{empheq}
+% \usepackage{cleveref}
 
 \usepackage{subcaption}
 
@@ -231,17 +234,17 @@ headsepline, % Uncomment to get a line under the header
 %
 % \listoftables % Prints the list of tables
 
-% %----------------------------------------------------------------------------------------
-% %	ABBREVIATIONS
-% %----------------------------------------------------------------------------------------
-%
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+
 % \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
 %
-% \textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere\\
-% \textbf{WSF} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
+% \textbf{NMT} & \textbf{N}eural \textbf{M}achine \textbf{T}ranslation\\
+% \textbf{LSTM} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
 %
 % \end{abbreviations}
-%
+
 % %----------------------------------------------------------------------------------------
 % %	PHYSICAL CONSTANTS/OTHER DEFINITIONS
 % %----------------------------------------------------------------------------------------
@@ -313,6 +316,7 @@ headsepline, % Uncomment to get a line under the header
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
+\nocite{*}
 \printbibliography[heading=bibintoc]
 
 %----------------------------------------------------------------------------------------

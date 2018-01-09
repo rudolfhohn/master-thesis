@@ -5,7 +5,7 @@
 
 \label{Chapter3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-This chapter reviews the different experiments undertaken during this thesis. The goal of these experiments is to measure the effectiveness of more complex models against simple ones. All models are trained with the Cornell Movie Dialogs corpus.
+This chapter reviews the different experiments undertaken during this thesis. The goal of these experiments is to measure the effectiveness of more complex models against simple ones, the different feature engineering process and the computational performance between different GPUs. All models are trained with the Cornell Movie Dialogs corpus.
 
 Technologies
 Keras / TensorFlow / word2vec pretrained
@@ -27,4 +27,9 @@ How does the NMT tutorial helps this thesis, what is it used for, what are the d
 1503.02364: two weeks of training on one Tesla K40 (4.29 TFlops, M4000 2.57 TFlops, Titan V 110 TFlops) for a huge model (1k hidden states for both encoder/decoder, 620 vector space word2vec, sgd, mini-batch, vocab 40k)
 
 \section{Hardware doing the calculations}
-First I tried on Baobab, but OS too old and the server crashed while the admin was on vacations. Then, thanks to a grant of 300 CHF offered by hepia, I was able to use a dedicated Nvidia Quadro M4000 on paperspace and do all the training with it.
+Tensorflow is able to run on both CPU and GPU systems without changing the code. Thus, preparing the script on a local computer and performing the training on a server is
+easily feasible. The server used is hosted on a GPU accelerated cloud platform, Paperspace\footnote{https://www.paperspace.com/} with pre-configured flavors for machine learning applications. The machine used for all experiments is the ``\textit{GPU+}'' flavor configured with 30GB RAM, 8 CPU cores and a dedicated NVIDIA Quadro M4000, Maxwell generation, with 8GB VRAM and 192 GB/s bandwith, computing 2.6 teraFLOPS.
+
+
+\textbf{Attention is meant to add precision for long-sentences, does it also add performance with sparse outputs like conversations?}
+In their results, \citet{1508.04025} show that for long sentences (between 30 and 70 words), the attention models keep track of the information whereas models without attention show catastrophic results. Moreover, even for short sentences, attention models outperform the model without attention.
