@@ -63,9 +63,14 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{amssymb}
 \usepackage{bm}
 \usepackage[overload]{empheq}
-% \usepackage{cleveref}
 
+\usepackage{listings}
+
+\usepackage{tabularx}
+\usepackage{multirow}
 \usepackage{subcaption}
+
+\newcommand{\tabhead}[1]{\textbf{#1}}
 
 \definecolor{codegray}{gray}{0.9}
 \newcommand{\code}[1]{{\texttt{#1}}}
@@ -167,7 +172,7 @@ headsepline, % Uncomment to get a line under the header
 % %	EXTERNAL CUSTOM TITLE PAGE
 % %----------------------------------------------------------------------------------------
 
-% \includepdf[pages={1,2,3,4}]{title.pdf}
+\includepdf[pages={1,2,3,4}]{title.pdf}
 
 % %----------------------------------------------------------------------------------------
 % %	DECLARATION PAGE
@@ -228,36 +233,32 @@ headsepline, % Uncomment to get a line under the header
 % 	LIST OF CONTENTS/FIGURES/TABLES PAGES
 % ----------------------------------------------------------------------------------------
 
-% \tableofcontents % Prints the main table of contents
-%
-% \listoffigures % Prints the list of figures
-%
-% \listoftables % Prints the list of tables
+\tableofcontents % Prints the main table of contents
+
+\listoffigures % Prints the list of figures
+
+\listoftables % Prints the list of tables
 
 %----------------------------------------------------------------------------------------
 %	ABBREVIATIONS
 %----------------------------------------------------------------------------------------
 
-% \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
-%
-% \textbf{NMT} & \textbf{N}eural \textbf{M}achine \textbf{T}ranslation\\
-% \textbf{LSTM} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or\\
-%
-% \end{abbreviations}
+\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
 
-% %----------------------------------------------------------------------------------------
-% %	PHYSICAL CONSTANTS/OTHER DEFINITIONS
-% %----------------------------------------------------------------------------------------
-%
-% \begin{constants}{lr@{${}={}$}l} % The list of physical constants is a three column table
-%
-% % The \SI{}{} command is provided by the siunitx package, see its documentation for instructions on how to use it
-%
-% Speed of Light & $c_{0}$ & \SI{2.99792458e8}{\meter\per\second} (exact)\\
-% %Constant Name & $Symbol$ & $Constant Value$ with units\\
-%
-% \end{constants}
-%
+\textbf{AIML} & \textbf{A}rtificial \textbf{I}ntelligence \textbf{M}arkup \textbf{L}anguage\\
+\textbf{CBOW} & \textbf{C}ontinuous \textbf{B}ag \textbf{O}f \textbf{W}ords\\
+\textbf{DNN} & \textbf{D}eep \textbf{N}eural \textbf{N}etwork\\
+\textbf{ECM} & \textbf{E}motional \textbf{C}hatting \textbf{M}achine\\
+\textbf{GRU} & \textbf{G}ated \textbf{R}ecurrent \textbf{U}nit\\
+\textbf{LSTM} & \textbf{L}ong \textbf{S}hort \textbf{T}erm \textbf{M}emory\\
+\textbf{ML} & \textbf{M}achine \textbf{L}earning\\
+\textbf{NLP} & \textbf{N}atural \textbf{L}anguage \textbf{P}rocessing\\
+\textbf{NMT} & \textbf{N}eural \textbf{M}achine \textbf{T}ranslation\\
+\textbf{NNLM} & \textbf{N}eural \textbf{N}etwork \textbf{L}anguage \textbf{M}odel\\
+\textbf{RNN} & \textbf{R}ecurrent \textbf{N}eural \textbf{N}etwork\\
+
+\end{abbreviations}
+
 % %----------------------------------------------------------------------------------------
 % %	SYMBOLS
 % %----------------------------------------------------------------------------------------
@@ -293,7 +294,7 @@ headsepline, % Uncomment to get a line under the header
 
 \include{Chapters/Chapter1}
 \include{Chapters/Chapter2}
-\include{Chapters/Chapter3}
+% \include{Chapters/Chapter3}
 % \include{Chapters/Chapter4}
 % \include{Chapters/Chapter5}
 % \include{Chapters/Chapter6}
