@@ -1,0 +1,140 @@
+% !TEX root = ../main.tex
+% Appendix A
+
+\chapter{Detailed models and results} % Main appendix title
+
+\label{AppendixB} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+In this appendix, the script arguments for the Neural Machine Translation (NMT) script \citep{tensorflow.nmt}. Bold arguments' names are arameters changed during the different experiments in Chapter~\ref{Chapter4}.
+
+This NMT script version is on tensorflow's Github repository ``nmt'', on the branch ``\code{tf-1.4}'', with commit hash ``\code{910cfe846424de9142d4d569a4d6200f51b5cbfd}''.
+
+\begin{landscape}
+
+\begin{longtable}{p{.3\textheight} p{.1\textheight} p{.2\textheight} p{.35\textheight}}
+
+% \begin{longtable}{p{.3\textheight} | p{.1\textheight} | p{.25\textheight} | p{.3\textheight}}
+    % \centering
+    % \begin{tabularx}{\textheight}{l | l | X | X}
+    \caption[Detailed models and results]{NMT script arguments. Bold arguments' names mean that the arguments were changed during experiments in Chapter~\ref{Chapter4}. Source: \citet{tensorflow.nmt}}
+    \label{tab:apx:nmt-args}\\
+
+    \toprule
+    \tabhead{Argument} & \tabhead{Default} & \tabhead{Parameters} & \tabhead{Description} \\
+    \midrule
+    \endfirsthead % <=======================================
+      \toprule
+      \tabhead{Argument} & \tabhead{Default} & \tabhead{Parameters} & \tabhead{Description} \\
+      \midrule
+    \endhead % <=======================================
+      \midrule
+      \multicolumn{4}{r}{\textit{Continued on next page}} \\ % <=======================================
+      \bottomrule
+    \endfoot % <=======================================
+      \bottomrule
+    \endlastfoot % <=======================================
+
+    \multicolumn{4}{l}{\textit{Network}}\\
+    \codeb{-{}-num\_units} & 32 & $n\in\mathbb{N}$ & Network size and embeddings dimensionnality \\
+    \codeb{-{}-num\_layers} & 2 & $n\in\mathbb{N}$ & Network depth \\
+    \code{-{}-encoder\_type} & uni & uni, bi, gnmt & For bidirectional encoder, $\mathrm{num\_layers} /2$ bidirectional layers. \\
+    \code{-{}-residual} & False & Boolean & Residual connections \\
+    \code{-{}-time\_major} & True & Boolean & Depending if the input matrices are time-major or batch-major \\
+    \code{-{}-num\_embeddings\_partition} & 0 & $n\in\mathbb{N}$ & Number of partitions for embedding vars \\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Attention Mechanism}}\\
+    \codeb{-{}-attention} & \code{""} & luong, scaled\_luong, bahdanau, normed\_bahdanau & Attention mechanism model \\
+    \code{-{}-attention\_architecture} & standard & standard, gnmt, gnmt\_v2 & Attention architecture \\
+    \code{-{}-pass\_hidden\_state} & True & Boolean & Whether to pass encoder's hidden state to decoder when using attention \\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Optimizer}}\\
+    \codeb{-{}-optimizer} & sgd & sgd, adam & Network optimizer algorithm \\
+    \codeb{-{}-learning\_rate} & 1.0 & $\{n > 0 | n \in \mathbb{R}\}$ & Learning rate \\
+    \code{-{}-learning\_rate\_warmup\_steps} & 0 & $n \in \mathbb{N}$ & How many steps we inverse-decay learning \\
+    \code{-{}-learning\_rate\_warmup\_factor} & 1.0 & $\{n > 0 | n \in \mathbb{R}\}$ & The inverse-decay factor for each warmup step \\
+    \code{-{}-start\_decay\_step} & 0 & $n\in\mathbb{N}$ & When we start the decay \\
+    \code{-{}-decay\_steps} & 10000 & $n\in\mathbb{N}$ & How frequent we decay \\
+    \code{-{}-decay\_factor} & 0.98 & $\{n > 0 | n \in \mathbb{R}\}$ & How much we decay \\
+    \code{-{}-learning\_rate\_decay\_scheme} & \code{""} & luong & If specified, the three arguments above are overwritten. luong: after 1/2 num train steps, we start halving the learning rate for 5 times before finishing.\\
+    \code{-{}-num\_train\_steps} & 12000 & $n\in\mathbb{N}$ & Number of steps to train\\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Initializer}}\\
+    \code{-{}-init\_op} & uniform & uniform, glorot\_normal, glorot\_uniform & Technic to initialize weights in the network\\
+    \code{-{}-init\_weight} & 0.1 & $\{n > 0 | n \in \mathbb{R}\}$ & Range of the weights for initilization $[-a; a]$\\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Data}}\\
+    \codeb{-{}-src} & None & String & Source suffix (as file extension)\\
+    \codeb{-{}-tgt} & None & String & Target suffix (as file extension)\\
+    \codeb{-{}-train\_prefix} & None & String & Train prefix (as file name), expect src/tgt suffix\\
+    \codeb{-{}-dev\_prefix} & None & String & Dev prefix (as file name), expect src/tgt suffix\\
+    \codeb{-{}-test\_prefix} & None & String & Test prefix (as file name), expect src/tgt suffix\\
+    \codeb{-{}-out\_dir} & None & String & Directory name to store logs and model files\\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Vocab}}\\
+    \codeb{-{}-vocab\_prefix} & None & String & Vocabulary file prefix. If None, extract from train files.\\
+    \code{-{}-sos} & <s> & String & Start of sentente symbol\\
+    \code{-{}-eos} & </s> & String & End of sentente symbol\\
+    \code{-{}-share\_vocab} & False & Boolean & Whether use the same vocab and embeddings for both source and target\\
+    \code{-{}-check\_special\_token} & True & Boolean & Whether check special sos, eos, unk tokens exist in the vocabulary files\\
+
+    \multicolumn{4}{l}{}\\ % for page alignment purposes
+    % \hline
+    \multicolumn{4}{l}{\textit{Sequence lengths}}\\
+    \code{-{}-src\_max\_len} & 50 & $n\in\mathbb{N}$ & Max length for source sentence during training\\
+    \code{-{}-tgt\_max\_len} & 50 & $n\in\mathbb{N}$ & Max length for target sentence during training\\
+    \code{-{}-src\_max\_len\_infer} & None & $n\in\mathbb{N}$ & Max length for source sentence during inference\\
+    \code{-{}-tgt\_max\_len\_infer} & None & $n\in\mathbb{N}$ & Max length for target sentence during inference\\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Other settings}}\\
+    \codeb{-{}-unit\_type} & lstm & lstm, gru, layer\_norm\_lstm & RNN unit type\\
+    \code{-{}-forget\_bias} & 1.0 & $\{n > 0 | n \in \mathbb{R}\}$ & Forget bias for tensorflow.BasicLSTMCell\\
+    \code{-{}-dropout} & 0.2 & $\{n > 0 | n \in \mathbb{R}\}$ & Dropout rate\\
+    \code{-{}-max\_gradient\_norm} & 5.0 & $\{n > 0 | n \in \mathbb{R}\}$ & Clip gradients to this norm\\
+    \codeb{-{}-source\_reverse} & False & Boolean & Reverse source sequence\\
+    \code{-{}-batch\_size} & 128 & $n\in\mathbb{N}$ & Batch size\\
+    \code{-{}-steps\_per\_stats} & 100 & $n\in\mathbb{N}$ & How many train steps to do per stats loging\\
+    \code{-{}-max\_train} & 0 & $n\in\mathbb{N}$ & Max size of training data (0: no limit)\\
+    \code{-{}-num\_buckets} & 5 & $n\in\mathbb{N}$ & Number of similar-size buckets for data bucketing\\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Subwords}}\\
+    \code{-{}-bpe\_delimiter} & None & \@\@ & Set to ``\@\@'' to activate Byte Pair Encoding (BPE)\\
+    \code{-{}-subword\_option} & None & bpe, spm & Set to ``bpe'' or ``spm'' to activate subword desegmentation\\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Miscellaneous}}\\
+    \code{-{}-num\_gpus} & 1 & $n\in\mathbb{N}$ & Number of gpus for each worker\\
+    \code{-{}-log\_device\_placement} & False & Boolean & Debug GPU allocation\\
+    \code{-{}-metrics} & bleu & bleu, rouge, accuracy & Evaluation metric\\
+    \code{-{}-steps\_per\_external\_eval} & None & $n\in\mathbb{N}$ & How many training steps to do per external evaluation (automatically set if None)\\
+    \code{-{}-scope} & None & String & Scope name to put variables under\\
+    \code{-{}-hparams\_path} & None & String & Path to hparams file to override default values\\
+    \codeb{-{}-random\_seed} & None & $n\in\mathbb{N}$ & Random seed\\
+    \codeb{-{}-override\_loaded\_hparams} & False & Boolean & Override default hparams with specified values\\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Inference}}\\
+    \codeb{-{}-ckpt} & \code{""} & String & Checkpoint file to load a model for inference\\
+    \codeb{-{}-inference\_input\_file} & None & String & Input data to decode\\
+    \code{-{}-inference\_list} & None & String & A comma-separated list of sentence indices (0-based) to decode\\
+    \code{-{}-infer\_batch\_size} & 32 & $n\in\mathbb{N}$ & Batch size for inference mode\\
+    \code{-{}-inference\_output\_file} & None & String & Output file to store decoding results\\
+    \code{-{}-inference\_ref\_file} & None & String & Reference file to compute evaluation scores\\
+    \code{-{}-beam\_width} & 0 & $n\in\mathbb{N}$ & Beam width for beam search decoder. If 0, use greedy decoder\\
+    \code{-{}-length\_penalty\_weight} & 0.0 & $\{n > 0 | n \in \mathbb{R}\}$ & Length penalty for beam search\\
+    \code{-{}-num\_translations\_per\_input} & 1 & $n\in\mathbb{N}$ & Number of translations generated for each sentence during inference\\
+
+    \hline
+    \multicolumn{4}{l}{\textit{Job info}}\\
+    \code{-{}-jobid} & 0 & $n\in\mathbb{N}$ & Task id of the worker\\
+    \code{-{}-num\_workers} & 1 & $n\in\mathbb{N}$ & Number of workers for inference mode\\
+
+\end{longtable}
+
+\end{landscape}

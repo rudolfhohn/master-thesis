@@ -176,7 +176,7 @@ Figure~\ref{fig:nmt} presents the workflow of a NMT model. The example shown is 
     \centering
     \includegraphics[width=.8\textwidth]{nmt_training_scheme}
     \decoRule
-    \caption[Neural Machine Translation inference scheme]{Neural Machine Translation inference scheme \citep{tensorflow.nmt}. \textbf{(a)} \textit{Source input} refers to the input sequence tokenized to let the encoder read it token by token. \textbf{(b)} \textit{Target input} refers to the decoder input that let the decoder have the correct $t-1$ token. \textbf{(c)} \textit{Embedding layer} refers to the feedforward neural network language model that creates words' vector representation. \textbf{(d)} \textit{Encoder} refers to stacked LSTM used to build an abstract representation of the input sequence. \textbf{(e)} \textit{Decoder} refers to stacked LSTM that produce the output sequence based on the abstract representation built by the encoder and on the ``previous'' target word. \textbf{(f)} \textit{Hidden layers} refers to the number of stacked RNN layers. \textbf{(g)} \textit{Projection layer} refers to the probability distribution of the predicted word, used to calculate the loss. \textbf{(h)} \textit{Decoder output} refers to the output sequence tokenized.}
+    \caption[Neural Machine Translation model scheme]{Neural Machine Translation model scheme \citep{tensorflow.nmt}. \textbf{(a)} \textit{Source input} refers to the input sequence tokenized to let the encoder read it token by token. \textbf{(b)} \textit{Target input} refers to the decoder input that let the decoder have the correct $t-1$ token. \textbf{(c)} \textit{Embedding layer} refers to the feedforward neural network language model that creates words' vector representation. \textbf{(d)} \textit{Encoder} refers to stacked LSTM used to build an abstract representation of the input sequence. \textbf{(e)} \textit{Decoder} refers to stacked LSTM that produce the output sequence based on the abstract representation built by the encoder and on the ``previous'' target word. \textbf{(f)} \textit{Hidden layers} refers to the number of stacked RNN layers. \textbf{(g)} \textit{Projection layer} refers to the probability distribution of the predicted word, used to calculate the loss. \textbf{(h)} \textit{Decoder output} refers to the output sequence tokenized.}
     \label{fig:nmt}
 \end{figure}
 
@@ -187,6 +187,9 @@ Bucketing means that the training set is partitioned into buckets containing sen
 
 % \textbf{Evaluation: loss, perplexity, cross-entropy, BLEU, being an active research topic today}
 The top-layer of the decoder is fed to a softmax function to produce the predictive distribution. This distribution is used to extract the probability of every words being the target word or not, then the most probable word is chosen and output. To know how good a model works, the cross-entropy is calculated between the target and decoded distribution and used as the loss function to backpropagate the error through the network.
+
+Perplexity~\citet{jurafsky2014speech}.
+
 Moreover, to measure how good model actually generates words, the BLEU score is used~\citep{bleu-score}. The BLEU score measures the closeness of words between the decoded and target sentences using a n-gram precision.
 % \begin{equation}
 %     \mathrm{BLEU} = XX, \mathrm{BLEU} \in [0, 100]
@@ -200,7 +203,7 @@ Once the model is trained, there are mainly two approaches to decode a sentence,
     \centering
     \includegraphics[width=.8\textwidth]{nmt_inference_scheme}
     \decoRule
-    \caption[Neural Machine Translation model scheme]{Neural Machine Translation model \citep{tensorflow.nmt}. \textbf{(a)} \textit{Source input} refers to the input sequence tokenized to let the encoder read it token by token. \textbf{(b)} \textit{Embedding layer} refers to the feedforward neural network language model that creates words' vector representation. \textbf{(c)} \textit{Encoder} refers to stacked RNN model used to build an abstract representation of the input sequence. \textbf{(d)} \textit{Decoder} refers to stacked LSTM that produce the output sequence based on the abstract representation built by the encoder and on the $t-1$ output word. \textbf{(e)} \textit{Hidden layers} refers to the number of stacked LSTM layers. \textbf{(f)} \textit{Greedy search} takes the most probable output word at each timestep  \textbf{(g)} \textit{Decoder output} refers to the output sequence tokenized.}
+    \caption[Neural Machine Translation inference scheme]{Neural Machine Translation inference \citep{tensorflow.nmt}. \textbf{(a)} \textit{Source input} refers to the input sequence tokenized to let the encoder read it token by token. \textbf{(b)} \textit{Embedding layer} refers to the feedforward neural network language model that creates words' vector representation. \textbf{(c)} \textit{Encoder} refers to stacked RNN model used to build an abstract representation of the input sequence. \textbf{(d)} \textit{Decoder} refers to stacked LSTM that produce the output sequence based on the abstract representation built by the encoder and on the $t-1$ output word. \textbf{(e)} \textit{Hidden layers} refers to the number of stacked LSTM layers. \textbf{(f)} \textit{Greedy search} takes the most probable output word at each timestep  \textbf{(g)} \textit{Decoder output} refers to the output sequence tokenized.}
     \label{fig:nmt-inference}
 \end{figure}
 

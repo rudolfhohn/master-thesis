@@ -69,11 +69,18 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{tabularx}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{float}
+
+\usepackage{pdflscape}
+\usepackage{longtable}
+
+\usepackage{booktabs}
 
 \newcommand{\tabhead}[1]{\textbf{#1}}
 
 \definecolor{codegray}{gray}{0.9}
 \newcommand{\code}[1]{{\texttt{#1}}}
+\newcommand{\codeb}[1]{{\textbf{\texttt{#1}}}}
 \newcommand{\codeg}[1]{\colorbox{codegray}{\texttt{#1}}}
 
 % \usepackage{subfloats}
@@ -168,96 +175,101 @@ headsepline, % Uncomment to get a line under the header
 %
 % Title page is imported from 'title.pdf' page
 
-% %----------------------------------------------------------------------------------------
-% %	EXTERNAL CUSTOM TITLE PAGE
-% %----------------------------------------------------------------------------------------
-
-\includepdf[pages={1,2,3,4}]{title.pdf}
-
-% %----------------------------------------------------------------------------------------
-% %	DECLARATION PAGE
-% %----------------------------------------------------------------------------------------
-%
-% \begin{declaration}
-% \addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
-% \noindent I, \authorname, declare that this thesis titled, \enquote{\ttitle} and the work presented in it are my own. I confirm that:
-%
-% \begin{itemize}
-% \item This work was done wholly or mainly while in candidature for a research degree at this University.
-% \item Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
-% \item Where I have consulted the published work of others, this is always clearly attributed.
-% \item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
-% \item I have acknowledged all main sources of help.
-% \item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
-% \end{itemize}
-%
-% \noindent Signed:\\
-% \rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
-%
-% \noindent Date:\\
-% \rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
-% \end{declaration}
-%
-% \cleardoublepage
-%
-% %----------------------------------------------------------------------------------------
-% %	QUOTATION PAGE
-% %----------------------------------------------------------------------------------------
-%
-% \vspace*{0.2\textheight}
-%
-% \noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}\bigbreak
-%
-% \hfill Dave Barry
-%
-% %----------------------------------------------------------------------------------------
-% %	ABSTRACT PAGE
-% %----------------------------------------------------------------------------------------
-%
-% \begin{abstract}
-% \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-% Employee Engagement is becoming a priority for managers. They understand that engaged collaborators are motivated in their work, enjoy their work and are absorbed by their work, which leads to better overall performance for the company and a higher customer satisfaction. In the context of industry 4.0, answering surveys is not enough to measure effectively the engagement and to boost it. This project shows that it is possible to overcome this limitation and to detect if one is the engagement level with the technics used in Sentiment Analysis. However, further work is required to create a model with a bigger dataset and more complex, for instance with deep neural networks.
-%
-% \end{abstract}
-%
-% %----------------------------------------------------------------------------------------
-% %	ACKNOWLEDGEMENTS
-% %----------------------------------------------------------------------------------------
-%
-% \begin{acknowledgements}
-% \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-% The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
-% \end{acknowledgements}
-%
 % ----------------------------------------------------------------------------------------
-% 	LIST OF CONTENTS/FIGURES/TABLES PAGES
+% 	EXTERNAL CUSTOM TITLE PAGE
 % ----------------------------------------------------------------------------------------
-
-\tableofcontents % Prints the main table of contents
-
-\listoffigures % Prints the list of figures
-
-\listoftables % Prints the list of tables
-
-%----------------------------------------------------------------------------------------
-%	ABBREVIATIONS
-%----------------------------------------------------------------------------------------
-
-\begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
-
-\textbf{AIML} & \textbf{A}rtificial \textbf{I}ntelligence \textbf{M}arkup \textbf{L}anguage\\
-\textbf{CBOW} & \textbf{C}ontinuous \textbf{B}ag \textbf{O}f \textbf{W}ords\\
-\textbf{DNN} & \textbf{D}eep \textbf{N}eural \textbf{N}etwork\\
-\textbf{ECM} & \textbf{E}motional \textbf{C}hatting \textbf{M}achine\\
-\textbf{GRU} & \textbf{G}ated \textbf{R}ecurrent \textbf{U}nit\\
-\textbf{LSTM} & \textbf{L}ong \textbf{S}hort \textbf{T}erm \textbf{M}emory\\
-\textbf{ML} & \textbf{M}achine \textbf{L}earning\\
-\textbf{NLP} & \textbf{N}atural \textbf{L}anguage \textbf{P}rocessing\\
-\textbf{NMT} & \textbf{N}eural \textbf{M}achine \textbf{T}ranslation\\
-\textbf{NNLM} & \textbf{N}eural \textbf{N}etwork \textbf{L}anguage \textbf{M}odel\\
-\textbf{RNN} & \textbf{R}ecurrent \textbf{N}eural \textbf{N}etwork\\
-
-\end{abbreviations}
+% ============================= UNCOMMENT BELOW ==========================================
+%
+% \includepdf[pages={1,2,3,4}]{title.pdf}
+%
+% % %----------------------------------------------------------------------------------------
+% % %	DECLARATION PAGE
+% % %----------------------------------------------------------------------------------------
+% %
+% % \begin{declaration}
+% % \addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
+% % \noindent I, \authorname, declare that this thesis titled, \enquote{\ttitle} and the work presented in it are my own. I confirm that:
+% %
+% % \begin{itemize}
+% % \item This work was done wholly or mainly while in candidature for a research degree at this University.
+% % \item Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
+% % \item Where I have consulted the published work of others, this is always clearly attributed.
+% % \item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
+% % \item I have acknowledged all main sources of help.
+% % \item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
+% % \end{itemize}
+% %
+% % \noindent Signed:\\
+% % \rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
+% %
+% % \noindent Date:\\
+% % \rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
+% % \end{declaration}
+% %
+% % \cleardoublepage
+% %
+% % %----------------------------------------------------------------------------------------
+% % %	QUOTATION PAGE
+% % %----------------------------------------------------------------------------------------
+% %
+% % \vspace*{0.2\textheight}
+% %
+% % \noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}\bigbreak
+% %
+% % \hfill Dave Barry
+% %
+% % %----------------------------------------------------------------------------------------
+% % %	ABSTRACT PAGE
+% % %----------------------------------------------------------------------------------------
+% %
+% % \begin{abstract}
+% % \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+% % Employee Engagement is becoming a priority for managers. They understand that engaged collaborators are motivated in their work, enjoy their work and are absorbed by their work, which leads to better overall performance for the company and a higher customer satisfaction. In the context of industry 4.0, answering surveys is not enough to measure effectively the engagement and to boost it. This project shows that it is possible to overcome this limitation and to detect if one is the engagement level with the technics used in Sentiment Analysis. However, further work is required to create a model with a bigger dataset and more complex, for instance with deep neural networks.
+% %
+% % \end{abstract}
+% %
+% % %----------------------------------------------------------------------------------------
+% % %	ACKNOWLEDGEMENTS
+% % %----------------------------------------------------------------------------------------
+% %
+% % \begin{acknowledgements}
+% % \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
+% % The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
+% % \end{acknowledgements}
+% %
+% % ----------------------------------------------------------------------------------------
+% % 	LIST OF CONTENTS/FIGURES/TABLES PAGES
+% % ----------------------------------------------------------------------------------------
+%
+% \tableofcontents % Prints the main table of contents
+%
+% \listoffigures % Prints the list of figures
+%
+% \listoftables % Prints the list of tables
+%
+% %----------------------------------------------------------------------------------------
+% %	ABBREVIATIONS
+% %----------------------------------------------------------------------------------------
+%
+% \begin{abbreviations}{ll} % Include a list of abbreviations (a table of two columns)
+%
+% \textbf{AIML} & \textbf{A}rtificial \textbf{I}ntelligence \textbf{M}arkup \textbf{L}anguage\\
+% \textbf{CBOW} & \textbf{C}ontinuous \textbf{B}ag \textbf{O}f \textbf{W}ords\\
+% \textbf{DNN} & \textbf{D}eep \textbf{N}eural \textbf{N}etwork\\
+% \textbf{ECM} & \textbf{E}motional \textbf{C}hatting \textbf{M}achine\\
+% \textbf{EOS} & \textbf{E}nd \textbf{O}f \textbf{S}equence\\
+% \textbf{GRU} & \textbf{G}ated \textbf{R}ecurrent \textbf{U}nit\\
+% \textbf{LSTM} & \textbf{L}ong \textbf{S}hort \textbf{T}erm \textbf{M}emory\\
+% \textbf{ML} & \textbf{M}achine \textbf{L}earning\\
+% \textbf{NLP} & \textbf{N}atural \textbf{L}anguage \textbf{P}rocessing\\
+% \textbf{NMT} & \textbf{N}eural \textbf{M}achine \textbf{T}ranslation\\
+% \textbf{NNLM} & \textbf{N}eural \textbf{N}etwork \textbf{L}anguage \textbf{M}odel\\
+% \textbf{RNN} & \textbf{R}ecurrent \textbf{N}eural \textbf{N}etwork\\
+% \textbf{SOS} & \textbf{S}tart \textbf{O}f \textbf{S}equence\\
+%
+% \end{abbreviations}
+%
+% ============================= UNCOMMENT ABOVE ==========================================
 
 % %----------------------------------------------------------------------------------------
 % %	SYMBOLS
@@ -292,12 +304,12 @@ headsepline, % Uncomment to get a line under the header
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-\include{Chapters/Chapter1}
-\include{Chapters/Chapter2}
-% \include{Chapters/Chapter3}
-% \include{Chapters/Chapter4}
-% \include{Chapters/Chapter5}
-% \include{Chapters/Chapter6}
+% \include{Chapters/Chapter1}
+% \include{Chapters/Chapter2}
+\include{Chapters/Chapter3}
+\include{Chapters/Chapter4}
+\include{Chapters/Chapter5}
+\include{Chapters/Chapter6}
 
 % \listoftodos[Notes]
 %----------------------------------------------------------------------------------------
@@ -309,8 +321,8 @@ headsepline, % Uncomment to get a line under the header
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-%\include{Appendices/AppendixA}
-%\include{Appendices/AppendixB}
+% \include{Appendices/AppendixA}
+% \include{Appendices/AppendixB}
 %\include{Appendices/AppendixC}
 
 %----------------------------------------------------------------------------------------
