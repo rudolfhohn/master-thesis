@@ -1,0 +1,1473 @@
+
+
+
+Introduction to the thesis topic  
+
+Chapter1  
+
+The goal of this thesis is to analyze the different possibilities of constructing conversational agents (chatbots) and what is pragmatically possible today in terms of business applications and what are the next big problems research has to address. Chatbots created a certain interest in the media and in the industry by bringing a new way for businesses to communicate with their customers. Although chatbots exist since 1970s, only recently engineers were able to provide a good enough user experience and use the chatbots as an interaction channel between the customer and the company. Being robust, understanding and reliable are the keys to attract customers using chatbots.
+
+We also see new forms of User Experience requirements. Ergonoms and information visualisation specialists worked these past 20 years to provide best practices for desktop, web and mobile applications to let people enjoy the use of the application. However, with chatbots the main interaction relies on direct communication which rises new requirements.
+Character development and character management are new challenges and new jobs that rise with new chatbots 1704.04579 .
+Script writers from movie and theaters industries can bring their knowledge to create and imagine the "correct" way of discussing with a customer depending on its age, its culture or its gender.
+
+
+
+Chatbots are everyday present in our lives. Apple, Amazon, Google all have their advanced chatbots with different capabilities. For example, an iOS user can ask Siri to add a reminder, send a message or even, when coupled with domotics, turn off lights. Other businesses create chatbots to improve customer experience when selling services or products or booking a hotel or a flight. Facebook Messenger have created a developer-friendly interface to help businesses and people create a chatbot and enable it for all the 1.37 billion daily active users Facebook has facebook3rdquarter2017 . Dialogflow is an application that manages the backend of a chatbot. A developer uses their services to create scenarios and prepare the answers, the application will take care of all the natural language processing (NLP) and provide an intelligent conversational agent.
+
+These commercial applications are possible thanks to the research done in both NLP and deep learning fields in recent years. The two main approaches of constructing a chatbot are the rule-based approach and the generative approach. The first one exists for more than 20 years and has limitations. Developers write down all the possible sentences the chabot can encounter and provide the related answer. The first main issue rises when the user does not use the exact same vocabulary or write a sentence differently from what the developer planned and the chatbot is no longer able to answer.
+One of the technic used for these type of chatbot is known as the Artificial Intelligence Markup Language (AIML). As a markup language, developers write questions and the adequate answers in a file read by the AIML engine to interact with the user.
+
+The generative approach has appeared recently and take advantage of the progress in Machine Learning (ML) and more particularly of Deep Neural Networks (DNN). The idea of the generative models uses the underlying idea of any ML models ; given a large dataset, the model will be able to learn from the data and predict a value for any input.
+Basically, when a user sends a text to a chatbot, the text becomes the input of the ML model which generates an answer based on what it learned, and the chatbot responds to the user. The main advantage, which also answers the main issue of the rule-based approach, is that the model does not need the exact intended text, it can understand synonyms, different sentence constructions and still understand the intent of the user. However, the main disadvantage is the quantity of data needed to train a DNN model. Millions of examples are needed to train a robust generative model.
+
+This thesis is done for a startup based at EPFL that innovates in the way managers interact with and manage their teams.
+Understanding what is today possible to do with chatbots is important to help the startup refine its value proposition and build a roadmap for what will be possible tomorrow.
+
+The first chapter introduces the thesis topic and the aim of this work. Then, the second chapter presents a literature review of what is today done with conversational agents, and theory on recurrent neural networks, neural machine translation and advanced conversational agents.
+Third chapter presents how the thesis experiments different technics to build a chatbot using an end-to-end archicture and on which data the experiments are based on. The next chapter, fourth chapter, shows the results of the different experiments and comments them.
+Finally, the fifth chapter brings a discussion by comparing the theory and the experiments' results, and aims at proposing futur work. 
+
+
+
+
+Background information and theory  
+
+Chapter2  
+
+A conversational agent (chatbot) is intended to respond to a Human by taking advantage of all its knowledge, its capacity to detect sentiments or remember the context, or its ability to search information on the web. Chatbots tend to use text as input and output format, but it is also possible to use speech recognition and speech generation to allow users to speak, while conversing.
+
+Different approaches to build a conversation agent 
+Chatbots are created using two different approaches, namely the Rule-based  approach and the Generative  approach. The Rule-based approach, as its name indicates, uses rules to understand user input and pick from a list of answers a possible one. ule-based chatbots exist since 1966 with the developement of ELIZA chatbot intWeizenbaum:1966:ECP:365153.365168 . ELIZA's goal was to measure the psychological effects on Humans when they talk to a machine. Some of the test subjects found it really hard to believe that they were talking to a computer. ELIZA followed a script and analyzed user input to find keywords and to choose the proper answer. The workload for the developper was quite intensive and it would only take one situation that the developer might not have thought of and the user would understand he was not talking to a Human.
+
+The Generative approach is a machine learning (ML) model that takes advantage of the recent research and technology improvements enabling deep neural networks (DNN) model to be trained on large datasets. The main difference with the rule-based approach is that the chatbot learns and establishes its own rules based on the training dataset. Thus, generative models are less entitled to misunderstand the user but since they learn themselves the output sentences, they might generate sentences with punctuation errors, grammatical errors, or even generate incomprehensible sentences. Aside the generation problems, training deep neural networks is not an easy task and require high performance hardware.
+
+These two approaches are used in two different cases, closed-domain and open-domain conversations. A closed-domain conversation means that the chatbot answers to a particular type of questions. For example, if a company develops a chatbot to let users manage their booking details, it will only be able to answer requests about bookings and nothing else. At contrary, an open-domain chatbot is able to discuss about anything. For example, Siri the personnal assistant developed by Apple or Alexa the personnal assistant developed by Amazon are able to understand very different requests. Figure fig:types_chatbot  shows the different types of chatbots and hightlights the fact that the rule-based approach is only meant for closed-domain conversations. An open domain chatbot based on prepared scenarios and answers, following rules, is impractice due to the amount of work needed to construct such a system.
+
+figure 
+        types_chatbot 
+        Different types of chatbot 
+    fig:types_chatbot 
+figure 
+
+Rule-based models 
+In this section, two technics to build a rule-based are presented, a markup language technic and a web-based development tool.
+
+Artificial Intelligence Markup Language 
+Artificial Intelligence Markup Language (AIML) is an XML-compliant language that simplifies the creation of rule-based chatbotspwallace2005aiml . The four main tags are described below.
+itemize 
+    <aiml> : simply the tags that begins and ends a AIML document
+    <category> : tag to create an user intent
+    <pattern> : each category has a pattern, which is the exact phrase the user enters in the chatbot
+    <template> : what the chatbot answers
+itemize 
+An example of a category, from ALICEbot, is showed in Listing lst:aiml .
+lstlisting [language=XML, label=lst:aiml ]
+<category>
+    <pattern>WHAT ARE YOU</pattern>
+    <template>
+        I am the latest result in artificial intelligence,
+        which can reproduce the capabilities of the human brain
+        with greater speed and accuracy.
+    </template>
+</category>
+lstlisting 
+
+wallace2009anatomy  created a chatbot of approximately 41'000 categories called ALICE. A log extract of a conversation with ALICE is shows in Listing lst:alice-log .
+lstlisting [label=lst:alice-log ]
+judge: Hi alice
+ALICE: Hi there!
+judge: How are you ?
+ALICE: Fair to partly cloudy.
+judge: Cloudy ?
+ALICE: We have never talked about it before.
+judge: Who is the president of the united states ?
+ALICE: Obama.
+lstlisting 
+
+Development tools for rule-based conversational agents 
+The interest around chatbots has risen the past year and half, as shows Figure fig:trend_chatbot . Different products appeared since then on the market to help businesses and privates build and deploy chatbots. One example is Dialogflow(https://dialogflow.com/ )  but most of the tools follow the same logic. The goal of Dialogflow is to understand the intent of the user and trigger an action. The action can be a text response provided by Dialogflow or, Dialogflow can use a webhook and send the intents to a remote server that builds the response accordingly to user's intents.
+For example, a possible application would be a chatbot that tells the student where is the next lecture. Dialogflow understands the intent and forwards the request to the webhook. The webhook receives the intent and connects to the school servers to get the information and send it back to the user. Figure fig:dialogflow  shows the flow of interactions for a chatbot developed on Dialogflow.
+
+figure [b]
+        trend_chatbots 
+        [Web search interest for "chatbot"]Interest of the keyword "chatbot" in web searches for the past 5 years. Source: Google Trends 
+    fig:trend_chatbot 
+figure 
+
+figure 
+        dialogflow_flow 
+        [Dialogflow based chatbot]Flow of interactions for a chatbot developed on Dialogflow. Since the user is speaking to a chatbot, a certain latency is acceptable but should not exceed one second. 
+    fig:dialogflow 
+figure 
+
+The strength of these tools is that they extract the intent of the user without being restricted to an exact sentence. These tools are sometimes called hybrid because they are in their core rule-based models, but use Natural Language Processing (NLP) to understand better the user. Thus, the chatbots are more reliable and therefore, more interesting for companies like Swiss, Comcast, The Wall Street Journal or Mecedes-Benzpdialogflow . These chatbots are deployed over popular messaging platforms like Facebook Messenger or WhatsApp. Thus, the privacy of the data is an important concern. For example, Facebook's spokeswoman said that Messenger do not read the messages between people and businesses and Facebook do not use the content of Messenger conversations for any type of advertisingpfacebook-policy .
+
+Generative approach 
+Generative conversation models are based on a learning process and need a large set of training data (e.g.t1506.05869  used 62M sentences). Generative models are created using deep neural networks like Recurent Neural Network (RNN)p1503.02364,1506.05869 .
+
+Vector representation of words 
+
+As RNNs take real vectors as inputs, the text sequence are represented as continuous vectors, known as word embeddings. A technic called word2vecp1301.3781  proposes two log-linear models based on feedforward Neural Net Language Model (NNLM) to represent efficiently words in vector space. The first model architecture of word2vec is called the Continuous Bag-of-Words (CBOW) model and follow the feedforward NNLM architecture with one hidden layer.
+The idea behind is that we train a model to predict a word from a sentence using N words occuring before and N words occuring after in the sentence. Figure fig:example_w2v  illustrates an example where the training sentence is "This corpus contains millions entities"  and N equals 2. Figure fig:cbow  shows the CBOW architecture in formal way.
+
+figure 
+        example_w2v 
+    [Word2Vec basic example]Basic example of a training iteration in a word2vec model using the CBOW architecture. The training sentence is "This corpus contains millions entities"  and N equals 2. 
+    fig:example_w2v 
+figure 
+
+The skip-gram architecture, represented in Figure fig:skipgram , takes as input the current word to predict the context. Empirical resultsptf.word2vec  show that the Skip-gram model is more useful for large datasets than CBOW as it fits better on small datasets.
+
+figure 
+        subfigure .45 
+                word2vec_cbow 
+        [Continuous Bag-of-Words architecture]CBOW architecture from word2vec models. Context is used to predict the current word. 
+        fig:cbow 
+    subfigure 
+              
+    subfigure .45 
+                word2vec_skipgram 
+        [Skip-gram architecture]Skip-gram architecture from word2vec models. Current word is used to predict the context. 
+        fig:skipgram 
+    subfigure 
+        Word2vec architectures. Source: 1301.3781  
+    fig:word2vec 
+figure 
+
+An interesting finding byt1301.3781  shows that simple arithmetic operations can be performed on word embeddings to highlight and find words sharing the same relation. For example, .
+
+Recurrent Neural Networks 
+RNN is a neural network created to analyze time-series. Given a sequence , from time  to , a RNN outputs the sequence , iterating from time  to .
+Each RNN has two weight matrices, one for the input, , and one for the output, , as shown in Equation eq:rnn_y pgeron2017hands .
+Let  be an activation function and  the bias vector.
+
+align 
+    eq:rnn_y 
+    y _t &= (W _x^T x _t + W _y^T y _(t-1)  + b)
+align 
+
+Vanilla RNN present two main problems, described in bengio1994learning , namely the exploding and the vanishing gradient problem. The exploding gradient problem means that the gradient grow exponentially to a point where the weights of the network, during the backpropagation are overly updated and result to a network losing all its learning.tpascanu2013difficulty  proposed a simple trick to prevent exploding gradients by clipping the gradient if it becomes too big. In other words, if the gradient surpasses a certain threshold, the gradient is changed to the maximum allowed value.
+
+The vanishing gradient problem means that the backpropagation of the gradient over the weights of the neural network has no effect on the weights themselves because the gradient is too small, meaning that the network stops learning.
+Long short-term memory (LSTM)phochreiter1997lstm  is a RNN model having the capability of memorizing long distance information and being less affected by the vanishing gradient problem described intbengio1994learning . Instead of having a single activation function, for example , the LSTM cell has different gates interconnected with different functions.
+The following LSTM architecture is presented int1409.2329 , based on the work presented int1303.5778 . Let  be a hidden state in layer  in timestep  and let  be an affine transformation (). Figure fig:lstm-cell  shows a graphical illustration of a LSTM cell.
+
+align 
+    LSTM  &: h_t^l-1 , h_t-1 ^l, c_t-1 ^l h_t^l, c_t^l
+
+    pmatrix 
+        i
+
+        f
+
+        o
+
+        g
+
+    pmatrix  &=
+    pmatrix 
+        sigm 
+
+        sigm 
+
+        sigm 
+
+        sigm 
+
+    pmatrix 
+    T_2n,4n 
+    pmatrix 
+        h_t^l-1 
+
+        h_t-1 ^l
+
+    pmatrix 
+
+    c_t^l &= f c_t-1 ^l + i g
+
+    h_t^l &= o (c_t^l)
+align 
+
+figure 
+        lstm_cell 
+        [LSTM cell]LSTM cell. Let  be a hidden state in layer  in timestep . Source: 1409.2329  
+    fig:lstm-cell 
+figure 
+
+Dropoutpsrivastava2014dropout  is a technic often used in neural network models to reduce the chance to overfit. The dropout randomly corrupts certain weights to force the model to learn more robustly.t1409.2329  successfully applied dropout in their LSTM model by applying the dropout operator on the hidden states from the previous layer.
+
+Neural Machine Translation 
+The Neurel Machine Translation (NMT) model, proposed by nmt-phd , is inspired from the seq2seq architecture. Sequence-to-sequence (Seq2Seq) was first introduced by Googlep1409.3215  to be an end-to-end approach that makes only minimal assumptions on the sequence structure.
+Researchers observed that building end-to-end deep learning systems based on discriminative neural networks often work better with data minimally preprocessed chen2015handbook .
+In the use case of chatbots, the input and output sequences, or conversations, can have basically any length, only be tokenized, and the NN is able to learn. Seq2seq model takes text as a time-series and use RNN as the basic cell. Seq2Seq approach decomposes the architecture in two main parts, namely the encoder and the decoder. The encoder, intialized with random weights, takes as input a sequence of text and forms a fixed-size vector representation of it.
+The decoder, initialized with the last hidden state of the encoder, uses this abstract representation produced by the encoder to output the adequate output sentence. The fixed-size vector representation is meant at capturing relevant information from the input sentence.
+A notable difference between seq2seq and NMT is the input of the decoder. Figure fig:seq2seqmodel  shows the seq2seq model architecture. In the NMT model, the decoder is fed with target output embeddings.
+Figure fig:nmt  presents the workflow of a NMT model. The example shown is a translation problem, but NMT model architecture is used also for conversational agents or text summarizationptensorflow.nmt .
+
+figure 
+        seq2seq_model 
+        [Seq2Seq model architecture]Seq2Seq model architecture 1409.3215 . In the decoder part of the model, the output  is the input  
+    fig:seq2seqmodel 
+figure 
+
+figure 
+        nmt_training_scheme 
+        [Neural Machine Translation model scheme]Neural Machine Translation model schemeptensorflow.nmt . (a)  Source input  refers to the input sequence tokenized to let the encoder read it token by token. (b)  Target input  refers to the decoder input that let the decoder have the correct  token. (c)  Embedding layer  refers to the feedforward neural network language model that creates words' vector representation. (d)  Encoder  refers to stacked LSTM used to build an abstract representation of the input sequence. (e)  Decoder  refers to stacked LSTM that produce the output sequence based on the abstract representation built by the encoder and on the "previous" target word. (f)  Hidden layers  refers to the number of stacked RNN layers. (g)  Projection layer  refers to the probability distribution of the predicted word, used to calculate the loss. (h)  Decoder output  refers to the output sequence tokenized. 
+    fig:nmt 
+figure 
+
+Both the encoder and the decoder are RNN: LSTMp1409.3215,1508.04025  or GRUp1706.05125,1503.02364 . These RNN models need as input fixed-size sentences but conversations have varying length. To face this issue, the sentences are padded with  vectors to reach the size of the longest sentence of the training set. However, a lot of computation and memory is required to save vectors filled with zeros and train a model. This computation leak is resolved by bucketing the training set based on the length of the sentence.
+Bucketing means that the training set is partitioned into buckets containing sentences of approximately the same length. With buckets, sentences are still zero padded to the longest sentence of the bucket but it ensures that the padding is minimized.
+
+
+
+
+The top-layer of the decoder is fed to a softmax function to produce the predictive distribution. This distribution is used to extract the probability of every words being the target word or not, then the most probable word is chosen and output. To know how good a model works, the cross-entropy is calculated between the target and decoded distribution and used as the loss function to backpropagate the error through the network.
+
+Perplexity jurafsky2014speech .
+
+Moreover, to measure how good model actually generates words, the BLEU score is used bleu-score . The BLEU score measures the closeness of words between the decoded and target sentences using a n-gram precision.
+
+
+
+
+In NMT, the BLEU score works well because a translation is often the same even with a different context. For example, "maison" in French will almost always be translated as "house" in English.
+However, when dealing with conversational agents, the context can vary a lot, from the way the user write to, for example, the weather. From this observation,t1603.08023  showed that there are not currently a reliable method to measure the effectiveness of a chatbot, except the use of Human evaluators.
+
+Once the model is trained, there are mainly two approaches to decode a sentence, known as inference, namely the greedy search or the beam search. The greedy search takes the most probable output word at each timestep and fed it in the decoder's input at . This approach is computationnaly efficient but does not yield great quality. Figure fig:nmt-inference  shows the inference process using a greedy search.
+figure 
+        nmt_inference_scheme 
+        [Neural Machine Translation inference scheme]Neural Machine Translation inferenceptensorflow.nmt . (a)  Source input  refers to the input sequence tokenized to let the encoder read it token by token. (b)  Embedding layer  refers to the feedforward neural network language model that creates words' vector representation. (c)  Encoder  refers to stacked RNN model used to build an abstract representation of the input sequence. (d)  Decoder  refers to stacked LSTM that produce the output sequence based on the abstract representation built by the encoder and on the  output word. (e)  Hidden layers  refers to the number of stacked LSTM layers. (f)  Greedy search  takes the most probable output word at each timestep  (g)  Decoder output  refers to the output sequence tokenized. 
+    fig:nmt-inference 
+figure 
+
+The beam search is computationnaly more expensive than the greedy search but yields much better quality. The process of the beam search is to keep track of the most probable words at each time step and to feed the decoder's input with the N most probable words until the number of possibilities excess a certain threshold. At each time, the probabily of the whole sequence is calculated and only the words being in the most probable sentence are kept for .
+
+
+Attention mechanism 
+Intuitively, when one translates a sentence, one does not only read the sentence once and straightly translates it. The translation is based on the sentence overall and the translator goes back and forth in the source sentence to give the proper translation. The same intuition applies in conversations.
+In basic seq2seq architecture, the model only bases its input data knowledge on the encoder's last hidden state.t1508.04025  proposed a simple method to allow the model to pay attention to what matters at every timestep. They based their work on the research conducted byt1409.0473  that proposed an improvement in seq2seq model performance by allowing "the model to automatically (soft)-search for parts of a source sentence that are relevant to predicting a target word ".
+
+figure 
+        attention_basic_scheme 
+        [Attention basic scheme]Attention basic scheme. The decoder uses what is relevant from the input source to decode the sentence and not only the last hidden state of the encoder. Source: youtube-nmt-attention  
+    fig:attention_basic_scheme 
+figure 
+
+The attention mechanism can be seen as a memory which the model retrieves information when needed. Figure fig:attention_basic_scheme  shows the decoder taking into account attention in the decoding process.t1508.04025  proposed a simple and effective approach of the attention mechanism separated into two models, namely the global attention  and local attention , following nevertheless a common ground. At each time step , the hidden-state  at the top layer of the stacked LSTMs is taken to construct a context vector .
+The context vector  captures relevant source-side information that helps predicting the current target word . As for the basic NMT model, the decoder output is sent to a softmax function to output the predictive distribution. In an attention-based NMT, the current hidden state  is concatenated with the context vector  to produce an attentional hidden state, as showed in Equation equ:atn-hidden-state , whose fed through the softmax layer, as showed in Equation equ:atn-hidden-state-to-softmax .
+equation 
+    h  _t = ( W _c [c _t;h _t])
+    equ:atn-hidden-state 
+equation 
+equation 
+    p( y_t  y _<t , x) = softmax(W_s h _t ) 
+    equ:atn-hidden-state-to-softmax 
+equation 
+ The global and local attention models differ on how the context vector  is derived.
+
+ The global attentional model takes into account all the hidden states of the decoder to produce the context vector . This model compares the current target hidden  with each source hidden state  to derive a variable-length alignment vector  whose size equals the number of time steps on the source side.
+ align 
+    a _t(s) &= align (h _t, h  _s)
+
+    equ:atn-a_t 
+    &= exp (score (h _t, h  _s)) _s'  exp (score (h _t, h  _s' )) 
+ align 
+The score function  is presented in three different alternatives in 1508.04025 , as described in Equation equ:atn-score .
+subequations 
+    equ:atn-score 
+    align [left =score (h _t, h  _s) =  ]
+        & h _t^T h  _s & dot  equ:atn-score-dot 
+
+        & h _t^T W_a  h  _s & general  equ:atn-score-general 
+
+        & v _a^T ( W_a  [h_t ^T;h  _s]) & concat  equ:atn-score-concat 
+    align 
+subequations 
+The first alternative of the score function is described in Equation equ:atn-score-dot  and simply performs a dot product between the decoder hidden state and encoder hidden state and tries to find the words that are similar.
+The score function described in Equation equ:atn-score-general  resembles to the "dot " score function but instead, places a weight matrix in-between to let the model capture what part of the hidden states are relevant.tyoutube-nmt-attention  highlights the "general"  approach as working better than the two others and being the form well-adpoted by the community.
+The last alternative of the score function, described in Equation equ:atn-score-concat , is the one proposed byt1409.0473 . In this situation, the score function is like a neural network layer and the decoder and encoder hidden states are concatenated together, then multiplied by a weight matrix, fed to a sigmoid function and finally multiplied by a vector. The main concern with the last alternative is that the two hidden states are not interacting with each other.
+
+1508.04025  approach is similar tot1409.0473  but they have three main differences that simplifies and generalizes the concept. First, int1409.0473 , instead of using only the top hidden states, the model concatenates all source hidden states of the bidirectional encoder to the target hidden states.
+Secondly,t1409.0473  computation path requires hidden states from previous time whereas int1508.04025 , only the current time hidden states are used. Finally, as mentionned before,t1409.0473  used the third function score, described in Equation equ:atn-score-concat .
+Figure fig:atn_global  shows the global attention model.
+
+figure 
+        atn_global 
+        [Global attention model]Global attention model. At each time step , the model derives an alignment vector  by comparing the source hidden states  and the current target state  with a score function. Source: 1508.04025  
+    fig:atn_global 
+figure 
+
+The local attentional model, proposed byt1508.04025 , uses only a certain window around a position to compute the context vector. In other terms, it does not focus on everything at each timestep. In comparison to the global attentional model, the local attentional model is less expensive since it choses the subset of the source positions per target word. At each time step t, the context vector is created as a weighted average over the set of source hidden states within the window ,  being empirically chosen.
+This windows allows the attentional vector  to have a fixed size (. The  parameter can be set by two different alignment methods. The monotonic alignment  simply sets , assuming the source and the target sequences are somewhat aligned. The predictive alignment  learns and predicts  in a form of a single layer feedforward neural network, as shows in Equation equ:atn-pt-local-align ,  being the sentence length.
+equation 
+    p_t = S sigmoid  ( v _p^T ( W _p h _t))
+    equ:atn-pt-local-align 
+equation 
+The position  is taking into account to construct the alignment vector  as defined in Equation equ:atn-at-pt , the standard deviation being empirically set as .
+equation 
+    a _t(s) = align (h _t, h  _s)  exp (- (s - p_t)^2 2^2 )
+    equ:atn-at-pt 
+equation 
+Figure fig:atn-local  shows the local attention model.
+figure 
+        atn_local 
+        [Local attention model]Local attention model. The alignment vector  is inferred from a selected window of hidden states . The position  is learned and predicted to have a better alignment between the source hidden states  and the curret target state . Source: 1508.04025  
+    fig:atn-local 
+figure 
+
+Advanced conversational agents 
+Despite the fact that NMT can be used as an architecture for chatbots, more advanced models use other components that empower the chatbot with more capabilities like sentiment analysis or information retrieval.
+
+Emotional conversational agents 
+Chatbots are interesting to discuss with and sometimes they are useful, but in certain domain, like psychology, being able to react sentimentaly according to user's feelings can improve user experience and accomplish the awaited result.tecm-1704.01074  proposed an "end-to-end framework to incorporate emotion influence in large-scale conversation generation " called the Emotional Chatting Machine (ECM). The model baseline is the same as the NMT model augmented with the attention mechanism, but ECM incorporates additionnaly two memory layers, an internal and an external memory, and an emotion embedding.
+
+ECM integrates six different emotions categories, namely Anger, Disgust, Happiness, Like, Sadness, Other . Instead of creating a chatbot capable of chosing the appropriate emotion category to generate a response,tecm-1704.01074  simplified and focused the problem by generating a different response for every emotion category. Table tab:ecm  shows an example of different answers for a particular post.
+
+table 
+    [Emotional chatting machine sample responses]Emotional chatting machine sample responses. Source: ecm-1704.01074  
+    tab:ecm 
+        tabularx  X  l  p5cm  
+                Post  & Emotion Category  & Response 
+
+                
+        5 4cm Knowing the truth, I laughed myself to tears  & Like & Too lovely it's too lovely. 
+
+        & Happiness & I can't help laugh myself to tears. 
+
+        & Sadness & After knowing the truth, I burst into tears. 
+
+        & Disgust & Is this true? 
+
+        & Anger & What do you mean? I don't understand.
+
+            tabularx 
+table 
+
+MILABOT for Amazon Alexa Prize Competition 
+Open domain chatbots trained using machine learning algorithms without hand-crafted rules is an ongoing research topic. On this basis, Amazon.com launched in 2016 the Amazon Alexa Prize Competition with the goal of building a socialbot, in other terms, a chatbot being able to discuss about nearly anything (e.g. sports, entertainment, politics).talexa-1709.02349  presented the best chatbot, called MILABOT, capable of having a conversation to about 14 to 16 turns (i.e. a turn is an answer from the user or the chatbot).
+MILABOT is an ensemble-based machine learning system. It has several components that are trained to answer particular questions scored with an internal confidence. All the confidence score of all the modules are evaluated by the dialogue-manager to output the most appropriate answer. Figure fig:milabot-flow  shows the dialogue manager control flow.
+
+figure 
+        milabot_flow 
+        [MILABOT dialogue manager control flow]MILABOT dialogue manager control flow. The different modules generate their response with a confidence score. Then, the dialogue manager evaluate the different confidence scores and output the most appropriate response. Source: alexa-1709.02349  
+    fig:milabot-flow 
+figure 
+
+
+
+Experimental setup  
+
+Chapter3  
+
+This chapter reviews the different experiments undertaken during this thesis. The goal of these experiments is to measure the effectiveness of more complex models against simple ones, the different preprocessing strategies and the computational performance between different GPUs. All models are trained with the Cornell Movie Dialogs corpus.
+
+Cornell Movie Dialogs corpus 
+The Cornell Movie Dialogs corpuspcornell  is constructed from raw movie scripts. It has 220,579 conversational exchanges between 10,292 pairs of movie characters involving 9,035 characters from 617 movies. Here are some examples from the corpus.
+
+center 
+    "You have my word.  As a gentleman" - "You're sweet."
+
+    "There." - "Where?"
+
+    "Gosh, if only we could find Kat a boyfriend..." - "Let me see what I can do."
+center 
+
+The texts have very different lengths. Table tab:stats-cornell  shows some statistics of text lengths and Figure fig:hist-cornell-senteces-length  illustrates the conversations' length distribution. The large majority of conversations does not exceed 15 words.
+
+table 
+        [Statistics sentence corpus length]Statistics of sentences' lengths for Cornell Movie Dialogs corpus. All measures are letter-based and not word-based, except "Utterances" that simply represent the number of conversations in the dataset 
+    tab:stats-cornell 
+    tabular cccccccc 
+                Utterances  & Mean  & Min  & Max  & Std  & 25  & 50  & 75 
+
+                304713 & 55.32 & 1 & 3046 & 64.09 & 19 & 35 & 69
+
+            tabular 
+table 
+
+figure 
+        hist_cornell_sentences_length 
+        [Conversations length distribution]Conversations length distribution. The average word length in English is about five letters wolframlanguage , thus the large majority of the conversations does not exceed 15 words. X-axis represents the sentences lengths (letter-wised) and y-axis represents the number of sentences. 
+    fig:hist-cornell-senteces-length 
+figure 
+
+Experiments model architecture 
+The general purpose of this chatbot is to learn how to converse with other humans based on the movie dialogs. The model's architecture follows the Neural Machine Translation (NMT) model.
+Instead of translating from a language to another, the model "translates" the question into an answer, since the input and output have the same form in both cases.
+
+Since dialogs in movies are open-domain conversations, just splitting the dataset into a 80-10-10 cut to train models might not work well. Thus, the idea is to find a closer domain even in this context by trying to train the model to act like one the movie character. To ensure that the training does not suffer from the lack of data, the character is chosen based on the number of conversations he is involved into. Table tab:char-cornell  shows the five most present characters.
+
+table 
+    [Character presence analysis]Character presence analysis within the Cornell Movie Dialogs corpus presenting the five most present character 
+    tab:char-cornell 
+        tabular llllll 
+                & Jack  & Joe  & George  & Frank  & Nick 
+
+                Utterances  & 3032 & 1897 & 1748 & 1537 & 1484
+
+            tabular 
+table 
+
+In all the different runs, the training is done in two phases, namely the training, based on all the conversation, and the fine-tuning, based only on the conversations where the chosen character is answering. Other features like the gender of the character speaking first might lead to better results.
+
+
+Hardware doing the calculations 
+Tensorflow is able to run on both CPU and GPU systems without changing the code. Thus, preparing the script on a local computer and performing the training on a server is easily feasible.
+The server used in this thesis is hosted on a GPU accelerated cloud platform, Paperspace(https://www.paperspace.com/)  with pre-configured flavors for machine learning applications. The machine used for all experiments is the "GPU+ " flavor configured with 30GB RAM, 8 CPU cores and a dedicated NVIDIA Quadro M4000. Only one training was performed also on another machine to analyze if the cost of a more expensive flavor is worth the time saved.
+The more expensive is actually the most expensive one proposed by Paperspace with a dedicated last generation NVIDIA Tesla V100, Volta generation. Table tab:paperspace-flavors  summarizes the differences between the two flavors. The "V100 " flavor costs almost 6 times more than the other flavor.
+
+table 
+        [Paperspace flavors]Paperspace dedicated GPU flavors differences 
+    tab:paperspace-flavors 
+    tabular lllllll 
+                Flavor  & Generation  & VRAM  & Bandwith  & Performance  & Price 
+
+                GPU+ & Maxwell & 8 GB & 192 GB/s & 2.6 teraFLOPS & 0.40 per hour
+
+        V100 & Volta & 16 GB & 900 GB/s & 112 teraFLOPS & 2.30 per hour
+
+            tabular 
+table 
+
+
+
+Results  
+Chapter4  
+
+The main experiments' results are presented in this chapter. The different models trained and their results are explicitely detailed in Appendix AppendixB .
+
+
+Data preprocessing 
+Raw string sentence is preprocessed in order to give the encoder, and the decoder, a tokenized sequence. There are different steps to prepare data for training and these steps are illustrated in Figure fig:preprocess . First, the raw sentence is tokenized to separate words and punctuation, the casing is not changed because it carries different information (e.g. start of sentence).
+
+figure 
+        preprocess 
+        [Preprocessing steps in NMT]Preprocessing steps in an NMT model. Shapes with discontinued line refers to optional steps. 
+    fig:preprocess 
+figure 
+
+Secondly, from the tokenized sentences, the preprocessor extracts the vocabulary (i.e. all the tokens with the number of times it appears). Table tab:src-vocab  summarizes source vocabulary and Table tab:tgt-vocab  summarizes target vocabulary.
+Published work shows that people tend to limit the vocabulary. For example,t1508.04025 , with a dataset of 4.5M sentence pairs (20 times the size of Cornell Movies Dialogs corpus), the vocabulary was limited to the 50K most frequent words. Additionnaly, int1506.06714 , with a dataset of 12M sentences, the vocabulary was also limited to the 50K most frequent words.
+Table tab:reduce-vocab  illustrates how both vocabularies can be reduced by using a threshold on word counts and only keep the most frequent ones.
+In 1506.05869 , two different datasets were used. The first dataset contained 33M sentences and the vocabulary was limited to 20K words, and in the seconde dataset, composed of 88M sentences, the vocabulary was limited to 100K words.
+
+table 
+        [Source vocabulary analysis]Source vocabulary analysis. Number of unique words: 64839 . For example it only takes 12603  words (19.43  of the vocabulary) to reach 97  of the source sentences word count. 
+    tab:src-vocab 
+    tabular rrrr 
+                Total count   & Unique words  & Vocabulary   & Current count value 
+
+                90.0  & 1974  & 3.04  & 82 
+
+        97.0  & 12603  & 19.43  & 7 
+
+        98.0  & 19259  & 29.70  & 4 
+
+        99.0  & 32910  & 50.76  & 2 
+
+        99.9  & 61584  & 94.98  & 1 
+
+            tabular 
+table 
+
+table 
+        [Target vocabulary analysis]Target vocabulary analysis. Number of unique words: 65875  
+    tab:tgt-vocab 
+    tabular rrrr 
+                Total count   & Unique words  & Vocabulary   & Current count value 
+
+                90.0  & 1942  & 2.94  & 86 
+
+        97.0  & 12577  & 19.09  & 7 
+
+        98.0  & 19321  & 29.33  & 4 
+
+        99.0  & 33215  & 50.42  & 2 
+
+        99.9  & 62520  & 94.90  & 1 
+
+            tabular 
+table 
+
+table 
+        [Vocabulary reduction]Limiting the vocabulary size based on the word counts. 
+    tab:reduce-vocab 
+    tabular rrrr 
+                Min count  & Unique words  & Vocabulary   & Total count  
+
+                4 l Source vocabulary  
+
+        3  & 24347  & 37.55  & 98.47 
+
+        5  & 16456  & 25.38  & 97.66 
+
+        10  & 9881  & 15.24  & 96.34 
+
+                4 l Target vocabulary  
+
+        3  & 24736  & 37.37  & 98.49 
+
+        5  & 16724  & 25.39  & 97.69 
+
+        10  & 9947  & 15.10  & 96.38 
+
+            tabular 
+table 
+
+The final step of the preprocessing is different from the source and target set. Source sentences can be reversed, word-wised, to improve performance as mentionned int1409.3215 .
+Target sentences need to be padded with Start-Of-Sequence (SOS) and End-Of-Sequence (EOS) tokens to let the decoder know when the sequence starts and stops.
+
+The source and target vocabularies present similar statistics because of the fact that most of the conversations present in the corpus have multiple turns. Thus, for example, conversation [A, B, C, D]  is fed into the training set as [(A,B), (B, C), (C, D)]  which makes [B, C, D]  appear in both source and target sets.
+
+Tensorflow and the NMT tutorial 
+The models' training were done using the NMT tutorial script by tensorflow.nmt . The authors use the TensorFlow tensorflow2015-whitepaper  open-source library made "for numerical computation using data flow graphs ". Tensorflow simplifies development tasks in a machine-learning project. The developer creates his model as a graph, where nodes are operations and edges are matrices (tensors). From this graph definition of the mathematical model, Tensorflow automatically calculates the gradients and the derivatives needed for backpropagation.
+Another advantage to use Tensorflow is that it runs on either CPUs or GPUs without changing a line of code. The same code is used when the engineer works locally on its machine and when the model is trained on servers with dedicated GPU cards.
+
+The NMT tutorial script was written to let people create and train an NMT model without having to spend time coding and debugging the algorithmsis part of a 5 years long PhD thesispnmt-phd . The script has 65 different arguments, detailed in Appendix AppendixA , going from the source dataset file to the attention's type of architecture. Despite the lack of coding, if one uses the script, it has to fully understand all the arguments and how they modify the model in order to train  it correctly.
+
+Runs 
+
+There are five main runs that establish at the end the model parameters to create a chatbot based on the Cornell Movie Dialogs corpus. Among all the runs, except if specified, the dataset (i.e. training, development and test sets), model parameters specified in Table tab:runs-shared-param  and the seed for model initialization are kept unchanged to avoid biases and to measure effectively the different model performances.
+
+table 
+        [Runs shared parameters]Runs shared parameters. 
+    tab:runs-shared-param 
+    tabular ll p.5  
+                Parameter  & Value  & Comment 
+
+                - -numtrainsteps  & 12000  & Number of training steps
+
+        - -stepsperstats  & 100  & - 
+
+        - -randomseed  & 27  & - 
+
+        - -metrics  & bleu & BLEU score is used to evaluate the paramater text output
+
+        - -dropout  & 0.2  & - 
+
+        - -optimizer  & sgd & Use Stochastic Gradient Descent 
+
+        - -batchsize  & 128 & - 
+
+        - -numbuckets  & 5 & Number of buckets to group sentences of approximatively same length 
+
+            tabular 
+table 
+
+The models' name follows a writing convention to allow the reader to instantly know the parameters used to train a particular model. All the names have the following form, the parameters are separated with a dash.
+center 
+    run-20171212014119-norev-l8-u256-clstm-lr01-bw0-voc5 
+center 
+The following list explains the different separated "fields".
+itemize 
+    20171212014119 : which dataset the model was trained on
+    [no]rev : if the input sequence is reversed or not
+    l8 : how many layers the model has, here 8
+    u256 : how many units the model has, here 256
+    clstm : which RNN was used, here LSTM
+    lr01 : learning rate, here 
+    bw0 : beam width, here 0 so the decoding process uses gready search
+    voc5 : the count threshold used to filter out rare words from the vocabulary. If "voca", all the vocabulary is used
+itemize 
+
+
+Run 1 - Neural network parameters 
+This run is focused on the neural network parameters. The exhaustive list of the parameters tested is illustrated in Table tab:run01-params . 72 models were trained by combining the parameters, on the whole vocabulary of the training set.
+
+table 
+        [Run 1 parameters]Run 1 parameters measured. 
+    tab:run01-params 
+    tabular ll p.5  
+                Parameter  & Values  & Comment 
+
+                - -numlayers  & 2, 4, 8 & Network depth 
+
+        - -numunits  & 64, 128, 256 & Network size and emdeddings dimensionnality
+
+        - -cell  & lstm, gru & - 
+
+        - -learningrate  & 1.0, 0.1 & - 
+
+        - -beamwidth  & 0, 3 & If 0, decoding uses greedy search. If 3, decoding uses beam search
+
+            tabular 
+table 
+
+Table tab:run01-describe  shows the statistics for all the 72 models. The average time of training is about 70 minutes and the total training time is of 85 hours (3 days and 13 hours). The models presenting the minimum perplexities and maximum BLEU score are described in Table tab:run01-best-models .
+table 
+        [Run 1 performance statistics]Run 1 performance statistics 
+    tab:run01-describe 
+     
+table 
+table 
+        [Run 1 best models]Run 1 best models. The maximum  value of the BLEU score and the minimum  value of the perplexity are chosen. 
+    tab:run01-best-models 
+    tabular lrl 
+                Metric  & Best  & Model 
+
+                devppl & 86.71  & run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca
+
+        devbleu & 0.4  & run-20171212014119-norev-l2-u64-cgru-lr01-bw0-voca
+
+        testppl & 67.80  & run-20171212014119-norev-l2-u256-cgru-lr10-bw0-voca
+
+        testbleu & 0.2  & run-20171212014119-norev-l2-u128-clstm-lr10-bw0-voca
+
+            tabular 
+table 
+
+Since Table tab:run01-best-models  shows four different models for the four metrics and no decision can be made on which paramaters trains the best model, Table tab:run01-best-models-details  shows all the metrics for all the four models. There is no apparent best parameters based on these measures. The only shared parameter is that two layers seems to work the best.
+
+table 
+        [Run 1 best models]Run 1 best models with development and testing perplexity and BLEU score metrics. 
+    tab:run01-best-models-details 
+    tabular rrrr 
+                devppl  & devbleu  & testppl  & testbleu 
+
+                4 l run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca  
+
+        86.71  & 0.00  & 68.89  & 0.00 
+
+                4 l run-20171212014119-norev-l2-u64-cgru-lr01-bw0-voca  
+
+        172.04  & 0.40  & 141.75  & 0.20 
+
+                4 l run-20171212014119-norev-l2-u256-cgru-lr10-bw0-voca  
+
+        86.73  & 0.10  & 67.68  & 0.00 
+
+                4 l run-20171212014119-norev-l2-u128-clstm-lr10-bw0-voca  
+
+        94.54  & 0.10  & 75.34  & 0.20 
+
+
+            tabular 
+table 
+
+The question still to be answered is which parameter influences the most the performance of the model.
+Figure fig:res_run01_bw_ppl , Figure fig:res_run01_c_ppl , Figure fig:res_run01_l_ppl , Figure fig:res_run01_lr_ppl  and Figure fig:res_run01_u_ppl  illustrates the models' test perplexity against the different parameters.
+Based on the figures, the beam-width and the RNN does not influence the performance of the model. However, the greater learning rate and the greater number of units improve the model. At contrary, a deeper network (i.e. more layers) decreases the performance.
+
+The best model chosen for this run is "run-20171212014119-norev-l2-u128-clstm-lr10-bw0-voca".
+
+landscape 
+figure 
+        res_run01_bw_ppl 
+        [Results run01 BW-PPL]Run01 results. Each color represents a beam-width value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run01_bw_ppl 
+figure 
+figure 
+        res_run01_c_ppl 
+        [Results run01 C-PPL]Run01 results. Each color represents a RNN, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run01_c_ppl 
+figure 
+figure 
+        res_run01_l_ppl 
+        [Results run01 L-PPL]Run01 results. Each color represents a layer value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run01_l_ppl 
+figure 
+figure 
+        res_run01_lr_ppl 
+        [Results run01 LR-PPL]Run01 results. Each color represents a learning rate value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run01_lr_ppl 
+figure 
+figure 
+        res_run01_u_ppl 
+        [Results run01 U-PPL]Run01 results. Each color represents an unit value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run01_u_ppl 
+figure 
+landscape 
+
+Run 2 - Limit the vocabulary 
+Considering the time needed to train the models in run 1, and the fact that the NMT script tensorflow.nmt  was thought to use LSTM as RNN model, models using GRU are not tested from run 2. This run lasts for 31 hours (1 day and 7 hours) and focuses on the importance of the vocabulary in a chatbot model. Only words appearing more than five times in the training set are kept. As mentionned in Table tab:reduce-vocab , the source vocabulary for a count threshold of 5 contains 16456  unique words and the target vocabulary contains 16724  unique words.
+
+By comparing Table tab:run02-describe  and Table tab:run01-describe , the mean test perplexity in run 2 reduced by 52.53 and the minimum test perplexity reduced by 25.33. Although the maximum BLEU score kept the same value as during run 1, the mean test BLEU dropped of  points. Limiting the vocabulary lead to better results than the run 1. Table tab:run02-best-models-details  shows the best models for all the four metrics.
+
+table 
+        [Run 2 performance statistics]Run 2 performance statistics 
+    tab:run02-describe 
+     
+table 
+table 
+        [Run 2 best models]Run 2 best models with development and testing perplexity and BLEU score metrics. 
+    tab:run02-best-models-details 
+    tabular rrrr 
+                devppl  & devbleu  & testppl  & testbleu 
+
+                4 l run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voc5  
+
+        64.41  & 0.00  & 51.19  & 0.00 
+
+                4 l run-20171212014119-norev-l2-u256-clstm-lr10-bw0-voc5  
+
+        64.66  & 0.10  & 50.62  & 0.00 
+
+                4 l run-20171212014119-norev-l4-u256-clstm-lr01-bw0-voc5  
+
+        121.43  & 0.40  & 98.91  & 0.00 
+
+                4 l run-20171212014119-norev-l2-u64-clstm-lr01-bw0-voc5  
+
+        115.1  & 0.30  & 94.60  & 0.20 
+
+
+            tabular 
+table 
+
+Figure fig:res_run02_bw_ppl , Figure fig:res_run02_l_ppl , Figure fig:res_run02_lr_ppl  and Figure fig:res_run02_u_ppl  show that the model parameters act in the same way on models' performances than during run 1. The beam-width and the RNN parameters do not have an impact on the model performance. At contrary, limiting the number of layers, embedding in higher dimensionnality and prefering a higher learning rate tend to decrease the models' perplexities.
+
+The best model chosen for this run is: run-20171212014119-norev-l2-u256-clstm-lr10-bw0-voc5. The BLEU scores are still very low, thus the best model decision is mainly based on the test perplexity.
+
+landscape 
+figure 
+        res_run02_bw_ppl 
+        [Results run02 BW-PPL]Run02 results. Each color represents a beam-width value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run02_bw_ppl 
+figure 
+
+
+
+
+
+
+
+figure 
+        res_run02_l_ppl 
+        [Results run02 L-PPL]Run02 results. Each color represents a layer value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run02_l_ppl 
+figure 
+figure 
+        res_run02_lr_ppl 
+        [Results run02 LR-PPL]Run02 results. Each color represents a learning rate value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run02_lr_ppl 
+figure 
+figure 
+        res_run02_u_ppl 
+        [Results run02 U-PPL]Run02 results. Each color represents an unit value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run02_u_ppl 
+figure 
+landscape 
+
+
+Run 3 - Reversing input sequence 
+This run focuses on the benefits from inverting the input sequences. This run keeps the vocabulary limitation from run 2.
+
+By comparing Table tab:run02-describe  from run 2 and Table tab:run03-describe  describing the run 3 global performance statistics, there are some improvements. First, although the maximum development BLEU score is smaller by 0.1  point, the mean score improved of 0.01  point meaning that reversing input sequence might stabilize the models' performances. Secondly, the minimum test perplexity improved by 0.27  point and the mean test perplexity improved by 4.1  points.
+
+table 
+        [Run 3 performance statistics]Run 3 performance statistics 
+    tab:run03-describe 
+     
+table 
+
+Figure fig:res_run03_bw_ppl , Figure fig:res_run03_l_ppl , Figure fig:res_run03_lr_ppl  and Figure fig:res_run03_u_ppl  show that the model parameters act in the same way on models' performances than during run 1 and run 2. When performing the best, the following parameters are used.
+itemize 
+    Learning rate: 1.0
+    Number of units: 256
+    Number of layers: 2
+itemize 
+
+Table tab:run03-best-models-details  shows the best models for each one of the four metrics. There are only three models because the run "run-20171212014119-rev-l2-u256-clstm-lr10-bw0-voc5" has the best development and test perplexity. Thus, it is the best model chosen for this run.
+
+table 
+        [Run 2 best models]Run 2 best models with development and testing perplexity and BLEU score metrics. 
+    tab:run03-best-models-details 
+    tabular rrrr 
+                devppl  & devbleu  & testppl  & testbleu 
+
+                4 l run-20171212014119-rev-l2-u256-clstm-lr10-bw0-voc5  
+
+        64.41  & 0.10  & 50.35  & 0.00 
+
+                4 l run-20171212014119-rev-l2-u64-clstm-lr10-bw0-voc5  
+
+        76.50  & 0.10  & 61.02  & 0.00 
+
+                4 l run-20171212014119-rev-l2-u64-clstm-lr01-bw0-voc5  
+
+        114.62  & 0.30  & 94.32  & 0.20 
+
+
+            tabular 
+table 
+
+landscape 
+figure 
+        res_run03_bw_ppl 
+        [Results run03 BW-PPL]Run03 results. Each color represents a beam-width value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run03_bw_ppl 
+figure 
+
+
+
+
+
+
+
+figure 
+        res_run03_l_ppl 
+        [Results run03 L-PPL]Run03 results. Each color represents a layer value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run03_l_ppl 
+figure 
+figure 
+        res_run03_lr_ppl 
+        [Results run03 LR-PPL]Run03 results. Each color represents a learning rate value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run03_lr_ppl 
+figure 
+figure 
+        res_run03_u_ppl 
+        [Results run03 U-PPL]Run03 results. Each color represents an unit value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run03_u_ppl 
+figure 
+landscape 
+
+Run 4 - Attention mechanism 
+In their results,t1508.04025  show that for long sentences (between 30 and 70 words), the attention models keep track of the information whereas models without attention show catastrophic results. Moreover, even for short sentences, attention models outperform the model without attention. Knowing that, it would be interesting to measure if the attention mechanism increases the performance of the chatbot as well. However,t1506.05869 , building a neural conversation machine, reported that adding the attention mechanismp1409.0473  did not improve the perplexity on neither training or validation sets.
+
+There are two different attention mechansims tested in this run, namely the "luong" (described in Chapter Chapter2 ,tnmt-phd ) and "scaled-luong". The second attention mechanism is almost the same as the first with the exception that it is using a weight normalization inspired fromt1602.07868 . Reparameterizing the weights allow the model to converge faster in a stochastic gradient descent.
+
+Run 4 only keeps the best value of the parameters "learning rate"  and "layers"  found in the three previous runs. The learning is fixed to 1.0  and the number of layers is fixed to 2 .
+Moreover, since the number of units kept improving the results, instead of testing on "64", "128" and "256", run 4 uses the values "256", "384" and "512". In total, during this run, 12 models were trained, in 9 hours.
+
+Table tab:run04-describe  desribes the statistics around the run 4 trainings. Since two parameters were chosen following the three previous runs, the standard deviation for all the metrics is significantly reduced. Comparing with the results from previous run, the mean test perplexity increased of 2.21  points and the test BLEU metric is now only 0.00 . The attention mechanism increases the number of learnable parameters and this might mean that there is not enough data to also train the attention weights.
+
+table 
+        [Run 4 performance statistics]Run 4 performance statistics 
+    tab:run04-describe 
+     
+table 
+
+Figure fig:res_run04_bw_ppl , Figure fig:res_run04_u_ppl  and Figure fig:res_run04_at_ppl  illustrates the models behaviour following different parameters' values. As for all other previous runs, the beam width does not decrease or increase by itself the performance of the models. As suspected, adding more units to the model lead to better results. However, the difference of performance from run 1, 2 or 3 between 64 units and 256 units is now less visible between 256 units and 512 units. Finally, the different attention strategies do not seem to have an impact themselves on the models' performances.
+
+The model having the best test perplexity is "run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong".
+
+landscape 
+figure 
+        res_run04_bw_ppl 
+        [Results run04 BW-PPL]Run04 results. Each color represents a beam-width value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run04_bw_ppl 
+figure 
+figure 
+        res_run04_u_ppl 
+        [Results run04 U-PPL]Run04 results. Each color represents an unit value, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run04_u_ppl 
+figure 
+figure 
+        res_run04_at_ppl 
+        [Results run04 AT-PPL]Run04 results. Each color represents an different attention mechanism implementation, x-axis represents the run number and y-axis the test perplexity. 
+    fig:res_run04_at_ppl 
+figure 
+landscape 
+
+Run 5 - Other dataset splitting ratio 
+Since the BLEU score was significantively small for the four previous runs, this run aims at training models using dataset with the 80-10-10 ratio for the training, development and testing sets. The training set contains 177023  conversations, the development set contains 22095  and the test set contains 22161  conversations.
+
+The parameters used for this run are the same as in run 4, except the number of units which is here fixed to "512". In total, this run trained 4 different models, in 17 hours.
+
+Table tab:run05-describe  shows the different performances obtained during the run. By comparing it with Table tab:run04-describe , from run 4, the mean test perplexity increased of 13.35  points and the min test perplexity increased by 12.29  points. However, the BLEU score for both development and test are better than during previous run. Both mean BLEU score is at 0.15  point, which is 0.12  higher than run 4 development BLEU score.
+
+Although the perplexities are worse than in run 4, BLEU scores are better and it might mean that besides the lack of evidence that BLEU score is useful to evaluate chatbots, the other dataset might have too small development and test sets.
+
+Besides the evaluation metrics, the time needed to train a model is longer. The mean time is 15433.25  whereas in run 4, the mean time was 2796.67 , being around 5 times faster than run 5.
+
+table 
+        [Run 5 performance statistics]Run 5 performance statistics 
+    tab:run05-describe 
+     
+table 
+
+To keep consistency with the choice of the best model for the run, "run-20180119152007-rev-l2-u512-clstm-lr10-bw3-atluong" is chosen based on the test perplexity even if its BLEU score is interesting.
+
+Run 6 - GPU performance test 
+In the previous chapter, Table tab:paperspace-flavors  showed that the "V100 " flavor costed more than 6 times the flavor used for runs 1 to 5 for a theorical gain in performance of around 43 times (2.6 teraFLOPS against 112 teraFLOPS). This run compares the training time for an exact same model on both flavors to bring the needed information for decision makers.
+
+Table tab:run06-results  illustrates the performance results of the same model trained on different machines. The time gain to use machine that costs 6 times more is around 30. Besides the time, the perplexities and the BLEU score are similar.
+Even though it is only one measure, this run aims at raising awareness on the importance to know very well the model trained to be able to choose correctly the best infrastructure (with a limited budget).
+
+table 
+        [Run 6 GPUs performances results]Run 6 GPUs performances results 
+    tab:run06-results 
+    tabular crrrrr 
+                Flavor  & devppl  & devbleu  & testppl  & testbleu  & Time [s] 
+
+                GPU+ & 104.71  & 0.5  & 83.84  & 0.3  & 2317 
+
+        V100 & 105.12  & 0.3  & 84.23  & 0.2  & 1596 
+
+            tabular 
+table 
+
+Inference 
+This section illustrates how the chabtbots actually converse. Since run 6 was just a GPU performance test, only the best models of the five other runs are used. There are 10 different questions or situtations, quite simple, and the chatbots' answers are illustrated in Table tab:res-inference .
+
+First, almost all models answers "Hello !" with a "Hi .", and all models answer "No ." to the question "Are you a follower or a leader" and "What ?" to the affirmation "Done .". This shows that NMT is able to learn some basics independently from the models' parameters.
+However, the attention mechanism seems to add more sense to the answers. Typically, in the question "How are you ?", both attention-based models answer that they are fine whereas other models do not understand the question.
+
+Secondly, the vocabulary plays an important role in the decoding process and it is witness with all the "<unk>" tokens in questions such as "What's your name" or "Where are you from". Personnal question learned from more than 9k movie characters is indeed difficult and there are high chances that some words in these particular questions appear less than 5 times (which is the threshold to keep or not a word in the vocabulary).
+
+Finally, even if the models presented in this section have respectively in their runs the best test perplexity, the answers are still not very convincing.
+
+
+
+longtable rcl 
+
+    [Inference results from best runs' models]Inference results from best runs' models. For each run, the best model is picked and is given the same 10 questions or situations. Models used by run: (1) run-20171212014119-norev-l2-u128-clstm-lr10-bw0-voca (2) run-20171212014119-norev-l2-u256-clstm-lr10-bw0-voc5 (3) run-20171212014119-rev-l2-u256-clstm-lr10-bw0-voc5 (4) run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong (5) run-20180119152007-rev-l2-u512-clstm-lr10-bw3-atluong 
+    tab:res-inference 
+
+    
+
+        Input  & Run  & Output  
+
+                Input  & Run  & Output  
+
+                    3 r Continued on next page   
+ 
+          
+          
+
+    5 * Hello !  & 1 & Hi .
+
+    & 2 & Hi .
+
+    & 3 & Hi .
+
+    & 4 & Hi . Hi .
+
+    & 5 & I know you are .
+
+
+        5 * How are you ?  & 1 & What ?
+
+    & 2 & I'm not sure .
+
+    & 3 & I'm not sure .
+
+    & 4 & I'm fine .
+
+    & 5 & Fine .
+
+
+        5 * What's your name ?  & 1 & The man .
+
+    & 2 & <unk> .
+
+    & 3 & <unk> .
+
+    & 4 & Hi .
+
+    & 5 & <unk> .
+
+
+        5 * Where are you from ?  & 1 & The man .
+
+    & 2 & <unk> .
+
+    & 3 & <unk> .
+
+    & 4 & To be .
+
+    & 5 & I don't know .
+
+
+        5 * My name is Rudolf . What is my name ?  & 1 & The man .
+
+    & 2 & <unk> .
+
+    & 3 & <unk> .
+
+    & 4 & Hi . Hi . Hi . Hi . How's business ?
+
+    & 5 & <unk> .
+
+
+        5 * What is your job ?  & 1 &  What ?
+
+    & 2 & <unk> .
+
+    & 3 & I don't know .
+
+    & 4 & My name is John .
+
+    & 5 & I don't know .
+
+
+        5 * Are you a follower or a leader ?  & 1 & No .
+
+    & 2 & No .
+
+    & 3 & No .
+
+    & 4 & No .
+
+    & 5 & No .
+
+
+        5 * What is the color of a yellow car ?  & 1 & You know what ?
+
+    & 2 & You know what ?
+
+    & 3 & You know what ?
+
+    & 4 & It's not a matter of time .
+
+    & 5 & I don't know .
+
+
+        5 * Done .  & 1 &  What ?
+
+    & 2 & What ?
+
+    & 3 & What ?
+
+    & 4 & What ? 
+
+    & 5 & What ?
+
+
+        5 * This car was driving too fast !  & 1 &  What ?
+
+    & 2 & You were right .
+
+    & 3 & What ?
+
+    & 4 & What ? 
+
+    & 5 & I know .
+
+
+    
+
+longtable 
+
+
+Human testing 
+In the precedent section, having based the best model selection on the test perplexity did not lead to models capable of real conversations. Thus, this section is aiming at showing the best models, not based on the perplexity, but on the perception of comprehension of a Human. In other terms, the chatbot is chosen only if its answers make sense.
+
+There are two models having quite good conversation skills amongst all the trained models, namely "run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca" and "run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong-voc5". Table tab:res-inference-human  shows the conversation skills of both models on the same inference set than in the previous section.
+
+Besides all expectations, the most "human" model has neither a limited vocabulary nor reverse input sentence or even attention mechanism. Thus, the perplexity might mean that the optimization is closer to its minima, but it does not mean that the chatbot does its job correctly.
+
+table 
+
+    [Best models inference from Human evaluation]Inference results from best models from Human evaluation. (1) run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca (2) run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong-voc5 
+    tab:res-inference-human 
+    tabular rcl 
+
+                Input  & Run  & Output  
+
+                2 * Hello !  & 1 & Hi .
+
+        & 2 & Hi . Hi .
+
+
+                2 * How are you ?  & 1 & Fine .
+
+        & 2 & I'm fine .
+
+
+                2 * What's your name ?  & 1 & Paul .
+
+        & 2 & Hi .
+
+
+                2 * Where are you from ?  & 1 & I don't know .
+
+        & 2 & To be .
+
+
+                2 * My name is Rudolf . What is my name ?  & 1 & Captain .
+
+        & 2 & Hi . Hi . Hi . Hi . How's business .
+
+
+                2 * What is your job ?  & 1 &  What ?
+
+        & 2 & My name is John .
+
+
+                2 * Are you a follower or a leader ?  & 1 & No .
+
+        & 2 & No .
+
+
+                2 * What is the color of a yellow car ?  & 1 & What ?
+
+        & 2 & It's not a matter of time .
+
+
+                2 * Done .  & 1 &  What ?
+
+        & 2 & What ?
+
+
+                2 * This car was driving too fast !  & 1 &  What ?
+
+        & 2 & What ? 
+
+
+            tabular 
+table 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Discussion, Perspectives and Conclusion  
+
+Chapter5  
+
+This thesis presented different approaches to build a conversational agent (chatbot), namely the rule-based approach and the generative approach. This thesis also experimented an end-to-end architecture used in Neural Machine Translation (NMT) to train a generative and open-domain chatbot based on movie dialogs.
+With around 220k training samples, Chapter Chapter4  showed that the chatbot is able to coverse with a human, more or less well depending on the model parameters. For example, a more complex model (e.g. more layers) lead to worse results than relatively simple models.
+How complex a model can be depends greatly on the data available to train the model. In comparison with other studies, the dataset used in this thesis is between 20 pDBLP:journals/corr/LowePSP15  and 100 p1506.05869  times smaller.
+
+Bigger datasets like Ubuntu Dialogs CorpuspDBLP:journals/corr/LowePSP15  or OpenSubtitlespopen-subtitle  might lead to better results, but only in a scientific approach.
+In an industrial approach, end-to-end open-domain chatbot is not yet possible because engineers have no real control on what the model actually learns or not.
+For example, Swisscom could train a customer service chatbot based on all the data recorded from the chat history, but what will happen when new services and products will come up?
+
+Besides another dataset, other model alternatives might offer better performance for a NMT model. Vocabulary for runs 2 to 5 was filtered by applying a count threshold and keeping the words appearing more than five times.
+However, using term frequency over inverse document frequency (TF-IDF) is able to give importance to words and not only base their selection on how many times they appearpmanning2008introduction . TF-IDF is a score that gives more importance to words that appear often but in a few documents than words that appear many times in many documents.
+
+
+
+In this thesis, the embeddings were also learned from the training set with variable sizes, from 64 to 512. After all the runs, the best dimensionnality is between 256 and 512.
+Besides training model's own embedding, pre-trained embeddings are available freely on Internet. Google made available pre-trained word and phrase vectors based on Google Newspgooglearchive-word2vec . The vectors are 300-dimensional for 3 millions words and phrases.
+Even if the vocabulary is different, having a good representation of the words might increase the performance. However, in a close-domain chatbot, like in medecine or law, using pre-trained word vectors may not allow the model to learn domain-specific knowledge.
+
+
+
+
+Tables tab:res-inference  and tab:res-inference-human  showed that raw outputs are not suitable for a real application. For example, there is a space between the last word and the punctuation because punctuations are seen as tokens by the model.
+The decoder can also output sentences with grammar errors. In order to use an end-to-end trained chatbot, the outputs have to be postprocessed and corrected, unsing simple regular expressions or more complex neural networks ast1606.00189 .
+
+The different runs showed the limits of automatic technics for evaluating the chatbots. Basically, in an NMT model, there are not many different translations possible from a particular sentence. Besides context specific information, a translation can be learned well. However, in conversations, even in the same context, most of the times many different answers are suitable.
+Thus, a BLEU score can be 0 , but still the model could output something "right".
+Knowing that, this thesis affirmed, in adequation with whatt1603.08023  presented, that automatic evaluations are not robust enough yet to validate or not a model. Human evaluation is still the most reliable option.
+Amazon Mechanical Turk (AMT) is a solution provided to companies that need human evaluation but do not have the ressources and the time to build a team to evaluate by hand a model. People register on the web platform and earn money by categorizing images, transcript audio and evaluate the output of a machine learning classifier.
+
+Other types of seq2seq model are researched for conversational agents. Google Neural Machine Translation (GNMT) is a NMT model, developped bytgnmt-1609.08144 , basing its architecture ontnmt-phd  NMT model.
+What GNMT improves against the basic NMT architecture is around two main issues with NMT, namely the expensive computational cost and the difficulty handling rare words.
+Another model that could be used in conversational agents is Convolutionnal Neural Network (CNN) based seq2seqpcnn-seq2seq-1705.03122 . CNN-seq2seq outperformed any other RNN-seq2seq in WMT'14 English-German and WMT'14 English-French, evaluation based on the BLEU score.
+
+miller2017parlai , from Facebook, does not do better with cornell dataset (try to infer the same data)
+
+This thesis shows that end-to-end open-domain chatbot is not yet possible. The closest open-domain chatbot is today a toolbox of independant conversational agents controlled by a dialogue manager, like Siri or Alexa. Truly open-domain chatbot might resemble to conciousness, a machine having stored enough knowledge to discuss anything with anyone, having its own opinions. The rising question is: when is it correct? There are opinions as many there Humans on Earth, maybe that before trying to develop such a chatbot, assuming that one day it will be possible, we can try asking ourselves, how could we define its personality?
+
+Besides dreams, ground-level scientific work is trying to push the limits of today’s chatbots and to bring a truly personnal assistant, capable of many things except thinking.
+
+End-to-end approach feels really as an uncontrollable and black-box type of machine. There is a important need to find a way of telling a chatbot that sentences and words are very powerful and can arm users by being rude or insensitive. For example, Tay, a chatbot developed by Microsoft and deployed on Twitter had to be shut down after 16 hours because it became offensive, racist and very aggressive towards other people on Twitter.
+
+There is still a lot of work before seeing anything like I-Robot. But, do we really need this kind of assistant? Or is it only a science challenge like an all-time dream from people doing Natural Language Processing and Artifical Intelligence?
+
+Can chatbots take decisions? Imagine Siri telling you "You should not buy cigarettes". How can a chatbot be right when almost no humans share all the same opinions or the way of speaking. What is the right thing to say in a certain context?
+
+Can chatbots replace apps? On what need businesses to be focused on today?
+
+This thesis asks more question than it answers.
+
+What businesses can do today is replace Humans using scripts by chatbots, and integrate the scenarios as user intents and have the correspondant answer. However, for unseen situation, Human support would still be a good a backup plan.
+
+
+
+Conclusion  
+
+Chapter6  
+
+
+Chapter Title Here  
+
+ChapterBase  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Chapter Title Here  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
