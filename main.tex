@@ -109,8 +109,7 @@ headsepline, % Uncomment to get a line under the header
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Exploration of Artifical Intelligence Technics for the Construction of Conversational Agents} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
-% \thesistitle{Statistical learning models to determine Employee Engagement in the workplace} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitle{Exploration of Artificial Intelligence Technics for the Construction of Conversational Agents} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 \supervisor{Dr. Guido \textsc{Bologna}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 \degree{Master of Science HES-SO in Engineering} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
@@ -137,116 +136,35 @@ headsepline, % Uncomment to get a line under the header
 
 \frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
 
-%\pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
-%
-%%----------------------------------------------------------------------------------------
-%%	TITLE PAGE
-%%----------------------------------------------------------------------------------------
-%
-% \begin{titlepage}
-% \begin{center}
-%
-% \vspace*{.06\textheight}
-% {\scshape\LARGE \univname\par}\vspace{1.5cm} % University name
-% \textsc{\Large Master Thesis}\\[0.5cm] % Thesis type
-%
-% \HRule \\[0.4cm] % Horizontal line
-% {\huge \bfseries \ttitle\par}\vspace{0.4cm} % Thesis title
-% \HRule \\[1.5cm] % Horizontal line
-%
-% \begin{minipage}[t]{0.4\textwidth}
-% \begin{flushleft} \large
-% \emph{Author:}\\
-% \href{http://www.johnsmith.com}{\authorname} % Author name - remove the \href bracket to remove the link
-% \end{flushleft}
-% \end{minipage}
-% \begin{minipage}[t]{0.4\textwidth}
-% \begin{flushright} \large
-% \emph{Supervisor:} \\
-% \href{http://www.jamessmith.com}{\supname} % Supervisor name - remove the \href bracket to remove the link
-% \end{flushright}
-% \end{minipage}\\[3cm]
-%
-% \vfill
-%
-% \large \textit{A thesis submitted in fulfillment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
-% \textit{in the}\\[0.4cm]
-% \groupname\\\deptname\\[2cm] % Research group name and department name
-%
-% \vfill
-%
-% {\large \today}\\[4cm] % Date
-% %\includegraphics{Logo} % University/department logo - uncomment to place it
-%
-% \vfill
-% \end{center}
-% \end{titlepage}
-%
-% Title page is imported from 'title.pdf' page
 
 % ----------------------------------------------------------------------------------------
 % 	EXTERNAL CUSTOM TITLE PAGE
 % ----------------------------------------------------------------------------------------
-% ============================= UNCOMMENT BELOW ==========================================
 
 \includepdf[pages={1,2,3,4}]{title.pdf}
 
-% %----------------------------------------------------------------------------------------
-% %	DECLARATION PAGE
-% %----------------------------------------------------------------------------------------
-%
-% \begin{declaration}
-% \addchaptertocentry{\authorshipname} % Add the declaration to the table of contents
-% \noindent I, \authorname, declare that this thesis titled, \enquote{\ttitle} and the work presented in it are my own. I confirm that:
-%
-% \begin{itemize}
-% \item This work was done wholly or mainly while in candidature for a research degree at this University.
-% \item Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
-% \item Where I have consulted the published work of others, this is always clearly attributed.
-% \item Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
-% \item I have acknowledged all main sources of help.
-% \item Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
-% \end{itemize}
-%
-% \noindent Signed:\\
-% \rule[0.5em]{25em}{0.5pt} % This prints a line for the signature
-%
-% \noindent Date:\\
-% \rule[0.5em]{25em}{0.5pt} % This prints a line to write the date
-% \end{declaration}
-%
-% \cleardoublepage
-%
-% %----------------------------------------------------------------------------------------
-% %	QUOTATION PAGE
-% %----------------------------------------------------------------------------------------
-%
-% \vspace*{0.2\textheight}
-%
-% \noindent\enquote{\itshape Thanks to my solid academic training, today I can write hundreds of words on virtually any topic without possessing a shred of information, which is how I got a good job in journalism.}\bigbreak
-%
-% \hfill Dave Barry
-%
-% %----------------------------------------------------------------------------------------
-% %	ABSTRACT PAGE
-% %----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
 
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
 
-Conversational agents (chatbots) have increased in popularity for the past 2 years. Businesses have a new way of communicating with their customers but must face challenges.
+Conversational agents (chatbots) have increased in popularity for the past two years. Businesses have a new way of communicating with their customers but must face challenges.
 This thesis aims at presenting different Artifical Intelligence approaches, namely the rule-based approach and the generative approach, to constructing a chatbot.
 The first chatbot was created in 1966 but since then, many improvements in Natural Language Processing and Machine Learning have led to the powerful chatbots known today as Alexa or Siri.
 
-Recurrent Neural Networks (RNNs) have proved to be very efficient in number of tasks including machine translation, text summarization or conversational agent. Sequence-to-Sequence (Seq2Seq) is a model architecture divided into two disctint parts, namely the encoder and the decoder, both containing RNN cells.
+Recurrent Neural Networks (RNNs) have proved to be very efficient in number of tasks including machine translation, text summarization or conversational agent. Sequence-to-Sequence (Seq2Seq) is a model architecture divided into two distinct parts, namely the encoder and the decoder, both containing RNN cells.
 The encoder creates an abstract representation of a sequence and the decoder uses this representation to output another sequence of text. Using this mechanism, Neural Machine Translation (NMT) model is able to translate texts in a very effective way. In addition, NMT is also able to construct a chatbot and converse.
 
-The different experiments aim at understanding the state of the art of chabot models and aim also at providing information on what is today feasible.
+The different experiments aim at understanding the state of the art of chatbot models and aim also at providing information on what is today feasible.
 The experiments illustrated models that are able to construct grammatically correct sentences, but occasionally sentences that were inconsistent with the question.
-However, Cornell Movie Dialogs corpus, the dataset used for the experiment, is between 1\% and 10\% the size of other datasets used to train more robust chatbots.
-Besides from the dataset, some parameters create better models. For example, a model with two hidden layers performs better that a model with four or eight hidden layers.
+However, Cornell Movie Dialogs corpus, the dataset used for the experiments, is between 1\% and 10\% the size of other datasets used to train more robust chatbots.
+Besides from the dataset, some parameters create better models.
+% For example, a model with two hidden layers performs better that a model with four or eight hidden layers.
+Limiting the vocabulary led to models outputting “<unk>” tokens (i.e. out of vocabulary tokens) and showed that the perplexity and BLEU score are not always correlated and that having two methods of evaluation constructing a chatbot might reduce the chances of misunderstanding results. Reversing the input sequence to bring the beginning of the encoder’s sequence closer to the beginning of the decoder’s sequence increased the models' performances. Finally, the attention mechanism did not improve the performances; however, this might have been due to the lack of data to train the attention layer correctly.
 
-This thesis proposes multiple ways to improve the models performances and present alternatives to the NMT model. The thesis then advises businesses on how they should behave with this new technology.
+This thesis proposes multiple ways to improve the models' performances and present alternatives to the NMT model. The thesis then advises businesses on how they should behave with this new technology.
 
 \end{abstract}
 
@@ -257,15 +175,15 @@ This thesis proposes multiple ways to improve the models performances and presen
 \begin{acknowledgements}
 \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
 
-Guido, support, realistic and pragmatic advices
+I would like to thank my supervisor, Guido Bologna, who trusted me with this thesis. His pragmatic advices allowed me to face more easily different obstacles and his deep knowledge of the field let me to understand much clearer the theoretical background.
 
-hepia+Nabil for paperspace
+I also thank Nabil Abdennadher who approved a fund to use Paperspace and train my models on GPUs.
 
-Alex for reading proof
+Without other people reading the thesis, there would be much more mistakes in the text. For that, I greatly thank Alex and Elodie.
 
-Elodie
+I think that without her support, I would not be where I am today. I would like to thank with all my heart Elodie to be present with me every day and to help in all of this process. Maybe  moving house and adopting a cat are not the best things to do during a master's thesis but we did it and we managed to keep me working and writing this thesis. Thank you for just being who you are.
 
-Family
+Last but not least, my parents deserve a great thank for all their support. They have always trusted me and showed me they would do anything to let me start my career with everything I would need. Thank you so much.
 
 \end{acknowledgements}
 
@@ -305,29 +223,6 @@ Family
 
 \end{abbreviations}
 
-% ============================= UNCOMMENT ABOVE ==========================================
-
-% %----------------------------------------------------------------------------------------
-% %	SYMBOLS
-% %----------------------------------------------------------------------------------------
-%
-% \begin{symbols}{lll} % Include a list of Symbols (a three column table)
-%
-% $a$ & distance & \si{\meter} \\
-% $P$ & power & \si{\watt} (\si{\joule\per\second}) \\
-% %Symbol & Name & Unit \\
-%
-% \addlinespace % Gap to separate the Roman symbols from the Greek
-%
-% $\omega$ & angular frequency & \si{\radian} \\
-%
-% \end{symbols}
-%
-% %----------------------------------------------------------------------------------------
-% %	DEDICATION
-% %----------------------------------------------------------------------------------------
-%
-% \dedicatory{For/Dedicated to/To my\ldots}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
@@ -345,9 +240,7 @@ Family
 \include{Chapters/Chapter3}
 \include{Chapters/Chapter4}
 \include{Chapters/Chapter5}
-% \include{Chapters/Chapter6}
 
-% \listoftodos[Notes]
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
@@ -359,7 +252,6 @@ Family
 
 \include{Appendices/AppendixA}
 \include{Appendices/AppendixB}
-%\include{Appendices/AppendixC}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY

@@ -1,7 +1,6 @@
 % !TEX root = ../main.tex
 % Chapter Background information and theory
 
-% \chapter{State-of-the-art of conversational agent systems} % Main chapter title
 \chapter{Background information and theory} % Main chapter title
 
 \label{Chapter2} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
@@ -146,12 +145,6 @@ Figure~\ref{fig:lstm-cell} shows a graphical illustration of an LSTM cell.
         \bm{g}\\
     \end{pmatrix} &=
     \mathrm{sigm}
-    % \begin{pmatrix}
-    %     \mathrm{sigm}\\
-    %     \mathrm{sigm}\\
-    %     \mathrm{sigm}\\
-    %     \mathrm{sigm}\\
-    % \end{pmatrix}
     \ T_{2n,4n}
     \begin{pmatrix}
         \bm{h}_t^{l-1}\\
@@ -190,8 +183,6 @@ Figure~\ref{fig:nmt} presents the workflow of an NMT model. The example shown is
 Both the encoder and the decoder are RNNs: LSTMs \citep{1409.3215,1508.04025} or GRUs \citep{1706.05125,1503.02364}. These RNN models need as input fixed-size sentences but conversations have varying length. To face this issue, the sentences are padded with $0$ vectors to reach the size of the longest sentence of the training set. However, a lot of computation and memory is required to save vectors filled with zeros and train a model. This computation leak is resolved by bucketing the training set based on the length of the sentence.
 Bucketing means that the training set is partitioned into buckets containing sentences of approximately the same length. With buckets, sentences are still zero padded to the longest sentence of the bucket but it ensures that the padding is minimized.
 
-% \textbf{Calculate the number of parameters}
-
 \begin{figure}
     \centering
     \includegraphics[width=.8\textwidth]{nmt_training_scheme}
@@ -200,7 +191,6 @@ Bucketing means that the training set is partitioned into buckets containing sen
     \label{fig:nmt}
 \end{figure}
 
-% \textbf{Evaluation: loss, perplexity, cross-entropy, BLEU, being an active research topic today}
 The top layer of the decoder is fed to a softmax function to produce the predictive distribution. This distribution is used to extract the probability of every word being the target word or not, then the most probable word is chosen and output. To know how good a model works, the categorical cross-entropy is calculated between the target and decoded distribution and used as the loss function to backpropagate the error through the network.
 
 Perplexity (PP) is a metric used to evaluate language models, instead of using raw probabilites. As described in~\citet{jurafsky2014speech}, the perplexity of a language model on a test set is \textit{the inverse probability of the test set, normalized by the number of words}. Let $\mathbf{W}$ be a test set $\mathbf{W}=w_1 w_2 ... w_N$ and let $N$ be the size of the test set. Equation~\ref{equ:pp} defined the perplexity.
@@ -213,10 +203,6 @@ In other words, minimizing the perplexity is the same as maximizing the probabil
 \end{equation}
 
 Moreover, to measure how good model actually generates words, the BLEU score, \citet{bleu-score}, is used. As opposed to the perplexity being an intrisic evaluation metric, the BLEU score is an extrinsic evaluation. The BLEU score measures the closeness of words between the decoded and target sentences using an n-gram precision.
-% \begin{equation}
-%     \mathrm{BLEU} = XX, \mathrm{BLEU} \in [0, 100]
-%     \label{equ:bleu}
-% \end{equation}
 In NMT, the BLEU score works well because a translation is often the same even with a different context. For example, ``maison'' in French will almost always be translated as ``house'' in English.
 However, when dealing with conversational agents, the context can vary a lot, from the way the user write to, for example, the precedent answer. From this observation, \citet{1603.08023} showed that there is not currently a reliable method to measure the effectiveness of a chatbot, except the use of human evaluators.
 

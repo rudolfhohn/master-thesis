@@ -6,33 +6,30 @@
 \label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
 This thesis presented different approaches to constructing a conversational agent (chatbot), namely the rule-based approach and the generative approach. This thesis also experimented an end-to-end architecture used in Neural Machine Translation~(NMT) to train a generative and open-domain chatbot based on movie dialogs.
-Open-domain chatbots requires an important amount of data. Knowing that Cornell Movie Dialogs corpus only has 220 thousand utterances, the objective was to focus the domain by learning how a chosen movie character discusses.
+Open-domain chatbots require an important amount of data. Knowing that Cornell Movie Dialogs corpus only has 220 thousand utterances, the objective was to focus the domain by learning how a chosen movie character discusses.
 The basic NMT architecture was also augmented with an attention mechanism to help the model grasp information within long sentences.
 The models were able to create grammatically correct sentences, but occasionally produced sentences that were inconsistent with the question.
 
 Following the different experiments, different approaches worked better than others.
-Limiting the vocabulary led to models outputing ``<unk>'' tokens (i.e. out of vocabulary tokens) and showed that the perplexity and BLEU score are not lways correlated, and that having two methods of evaluation constructing a chatbot might reduce the chances of misunderstanding results.
+Limiting the vocabulary led to models outputing ``<unk>'' tokens (i.e. out of vocabulary tokens) and showed that the perplexity and BLEU score are not always correlated, and that having two methods of evaluation constructing a chatbot might reduce the chances of misunderstanding results.
 Reversing the input sequence to bring the beginning of the encoder's sequence closer to the beginning of the decoder's sequence increased the models' performances.
-Finally, the attention mechanism did not improve the performances, however, this might have been due to the lack of data to train the attention layer correctly.
+Finally, the attention mechanism did not improve the performances; however, this might have been due to the lack of data to train the attention layer correctly.
 Training a model by dividing the dataset into 80-10-10 partitions between the training, the development and the testing set did not improve the quality of the translations.
 
 With around 220 thousand training samples, Chapter~\ref{Chapter4} showed that the chatbot is able to converse with a human, moderately well, depending on the model parameters. For example, a more complex model (e.g. more layers) led to worse results than relatively simple models.
 How complex a model can be depends greatly on the data available to train the model. In comparison with other studies, the dataset used in this thesis is between \num{20} \citep{DBLP:journals/corr/LowePSP15} and \num{100} \citep{1506.05869} times smaller.
 Bigger datasets like Ubuntu Dialogs Corpus \citep{DBLP:journals/corr/LowePSP15} or OpenSubtitles \citep{open-subtitle} might lead to better results, but only in a scientific approach.
 In an industrial approach, end-to-end open-domain chatbot is not yet possible because engineers have no real control over what the model learns.
-For example, a company could train a customer service chatbot based on all of the data recorded from the chat history, but new services and products will require to train the the model on data that will not exist yet.
+For example, a company could train a customer service chatbot based on all of the data recorded from the chat history, but new services and products will require to train the model on data that does not exist yet.
 
 Besides another dataset, other model alternatives might offer better performance for an NMT model. Vocabulary for runs 2 to 5 was filtered by applying a count threshold and keeping the words appearing more than five times.
 However, using term frequency over inverse document frequency (TF-IDF) is able to give importance to words and not only base their selection on how many times they appear \citep{manning2008introduction}. TF-IDF is a score that gives more importance to words that appear often in a few documents than words that appear many times in many documents.
 Using TF-IDF as filtering criteria might create a better vocabulary.
-% Other preprocessing step that can have an impact of the model's performance is the tokenization. For all of the runs, the sentences were tokenized word-wise, but
 
-% pre-trained word embeddings
 In this thesis, the embeddings were also learned from the training set with variable sizes, from 64 to 512 dimensions. After all of the runs, the best dimensionality is between 256 and 512.
 Besides model's own embedding, pre-trained embeddings are available freely on the Internet. Google made pre-trained word and phrase vectors available based on Google News \citep{googlearchive-word2vec}. The vectors are 300-dimensional for 3 million words and phrases.
 Even if the vocabulary is different, having a good representation of the words might increase the performance. However, in a close-domain chatbot, in the field of medicine or law for example, using pre-trained word vectors may not allow the model to learn domain-specific knowledge, and therefore render its function as useless.
 
-% post-processing, arXiv 1606.00189 (grammar correction trained)
 Tables~\ref{tab:res-inference} and~\ref{tab:res-inference-human} showed that raw outputs are not suitable for a real application. For example, there is a space between the last word and the punctuation since they are seen as tokens by the model.
 The decoder can also output sentences with grammatical errors. In order to use an end-to-end trained chatbot, the outputs have to be post-processed and corrected, using simple regular expressions or more complex neural networks such as \citet{1606.00189}.
 
@@ -53,30 +50,14 @@ Different augmented seq2seq models were also developed to answer a particular pr
 Moreover, \citet{1506.06714} proposed a context-sensitive model and allows an end-to-end model to integrate in a fully differentiable architecture to know the context of a discussion. In the paper, the context is defined as the previous utterance in a conversation.
 
 These different papers, and MILABOT \citep{alexa-1709.02349}, show that training a model that combines different human-like capabilities (e.g. context memorization, copying mechanism, small-talk) in an end-to-end fashion is unreasonably difficult and that constructing an ensemble-based model might be the best solution today.
-% \citet{miller2017parlai}, from Facebook, does not do better with cornell dataset (try to infer the same data)
 
-% This thesis shows that end-to-end open-domain chatbot is not yet possible. The closest open-domain chatbot is today a toolbox of independent conversational agents controlled by a dialogue manager, like Siri or Alexa. Truly open-domain chatbot might resemble consciousness, a machine having stored enough knowledge to discuss anything with anyone, having its own opinions. The rising question is: when is it correct? There are opinions as many there humans on Earth, maybe that before trying to develop such a chatbot, assuming that one day it will be possible, we can try asking ourselves, how could we define its personality?
-
-% Besides dreams, ground-level scientific work is trying to push the limits of today’s chatbots and to bring a truly personal assistant, capable of many things except thinking.
-
-% The end-to-end approach appears as an uncontrollable machine, and so this might have bad consequences.
 The end-to-end approach appears as an uncontrollable machine because it is very difficult to know what actually activates a particular answer. Moreover in the case of text generation, the number of possibilites is so important that it is not conceivable to be aware of every sequence a model might generate. Thus, any possible combination has a probability of apparition.
-In this thesis' case, the vocabulary is restricted to a list of words. However, a model can be trained with a vocabulary filled with words and subwords, as mentionned in~\cite{1508.07909}. In this case, a chatbot could potentially generate any word.
-% Knowing that words are powerful, maybe that using a guard that could measure the politeness or rudeness of an answer and
-% There is an important need to find a way of telling a chatbot that sentences and words are very powerful and can arm users by being rude or insensitive.
+In this thesis' case, the vocabulary is restricted to a list of words. However, a model can be trained with a vocabulary filled with words and subwords, as mentionned in~\cite{1508.07909}. In this configuration, a chatbot could potentially generate any word.
 For example, Tay, a chatbot developed by Microsoft and deployed on Twitter had to be shut down after 16 hours because it became offensive, racist and aggressive towards other people on Twitter. Its learning was based on the interaction with other people on Twitter, and some people were writing these offensive comments towards Tay which finally was able to reply with the same aggressivity.
 Perhaps a watchdog would be interesting as a form of rudeness detection model that could test everything the chabot outputs, censor offensive answers and ``punish'' the chatbot.
 
-% There is still a lot of work before seeing anything like I-Robot. But, do we really need this kind of assistant? Or is it only a science challenge like an all-time dream from people doing Natural Language Processing and Artifical Intelligence?
-
-% Can chatbots take decisions? Imagine Siri telling you ``You should not buy cigarettes''. How can a chatbot be right when almost no humans share all of the same opinions or the way of speaking. What is the right thing to say in a certain context?
-
-% Can chatbots replace apps? On what need businesses to be focused on today?
-
-% This thesis asks more question than it answers.
-
 Businesses should not focus their attention on open-domain generative models, rather they should consider rule-based models augmented with Natural Language Processing (NLP) to understand users' intent. In addition, there is no actual control on what the chatbot says, so it is dangerous to let customers interact with this kind of technology.
-What businesses can do today is replace humans using scripts by chatbots, integrate the scenarios as user intents, and program the corresponding answer. However, for an unseen situation, human support would still be a good a backup plan.
+What businesses can do today is replace humans using scripts by chatbots, integrate the scenarios as user intents, and program the corresponding answer. However, for an unseen situation, human support would still be a good backup plan.
 
-This thesis brings a realistic point of view to what is feasible in utilizing chatbots today. It is meant to help to more easily understand the business opportunities of this new kind of human-machine interaction by deepening the scientific details of the state-of-the-art end-to-end models.
+This thesis brings a realistic point of view to what is feasible in utilizing chatbots today. It is meant to help understand more easily the business opportunities of this new kind of human-machine interaction by deepening the scientific details of the state-of-the-art end-to-end models.
 Chatbots come with new challenges and new possibilities. Now it is the responsibility of the developers to make sure that its function is useful to consumers.
