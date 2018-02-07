@@ -1,36 +1,37 @@
 % !TEX root = ../main.tex
 % Chapter Introduction
 
-\chapter{Introduction to the thesis topic} % Main chapter title
+\chapter{Introduction} % Main chapter title
 
 \label{Chapter1} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-The goal of this thesis is to analyze the different possibilities of constructing conversational agents (chatbots) what is pragmatically possible today in terms of business applications and what are the next important challenges research has to address.
-Chatbots created a certain interest in the media and in the industry by bringing a new way for businesses to communicate with their customers. Although chatbots exist since the 1970s, only recently engineers were able to provide a good enough user experience and use the chatbots as an interaction channel between the customers and the company.
-Being robust, understanding and reliable are the keys to attract customers using chatbots.
+Conversational agents (chatbots) created a certain interest in the media and in the industry by bringing a new way for businesses to communicate with their customers. Although chatbots have existed since the 1970s, it is only recently that engineers have been able to provide a good enough user experience and use the chatbots as an interaction channel between the customers and the company.
+Understanding and reliability are the key to attracting customers using chatbots, otherwise they will just avoid this new technology.
+The goal of this thesis is to analyze the different possibilities of constructing chatbots and what is pragmatically possible today in terms of business applications. This paper then describes the next important challenges that research must address.
 
-We also see new forms of User Experience requirements. Ergonomists and information visualization specialists worked these past 20 years to provide best practices for desktop, web and mobile applications to let people enjoy the use of applications. However, with chatbots the main interaction relies on direct communication which raises new requirements.
+We see new forms of User Experience requirements. Ergonomists and information visualization specialists have worked for the past 20 years to develop best practices for desktop, web and mobile applications, thereby increasing enjoyment levels among application users.
+However, with chatbots the main interaction relies on direct communication which raises new requirements.
 Character development and character management are new challenges and new jobs that raise with new chatbots~\citep{1704.04579}.
-Scriptwriters from movie and theaters industries can bring their knowledge to create and imagine the ``correct'' way of discussing with a customer depending on its age, its culture or its gender.
+Scriptwriters from the movie and theatre industries can bring their knowledge to create and imagine the ``correct'' way of conversing with a customer in relation to age, culture and gender. Thus, helping developers imagine scenarios and create the wanted emotions when interacting with the chatbot.
 
 % The model architecture baseline uses a machine translation model architecture. However, instead of translating from a language to another (e.g. French to English), the model ``translates'' a sentence to another sentence and overall creates a conversational agent, a machine with discussing capabilities.
 
-Chatbots are already present every day in our lives. Apple, Amazon, Google all have their advanced chatbots with different capabilities. For example, an iOS user can ask Siri to add a reminder, send a message or even, when coupled with domotics, turn off lights. Other businesses create chatbots to improve customer experience when selling services or products or booking a hotel or a flight.
-Facebook Messenger has created a developer-friendly interface to help businesses and people create chatbots and enable them for all the 1.37 billion daily active users Facebook has~\citep{facebook3rdquarter2017}. Dialogflow is an application that manages the backend of a chatbot and it is another tool to help businesses create chatbots rapidly.
-A developer uses their services to create scenarios and prepares the answers, the application will take care of all the natural language processing (NLP) and provide an intelligent conversational agent.
+Chatbots are already present every day in our lives. Apple, Amazon and Google all have their advanced chatbots with different capabilities. For example, an iOS user can ask Siri to add a reminder, send a message or even, when coupled with domotics, turn off lights. Other businesses create chatbots to improve customer experiences when selling services or products, or booking a hotel or a flight.
+Facebook Messenger has created a developer-friendly interface to help businesses and people create chatbots and enable them for all of the 1.37 billion daily active users Facebook has~\citep{facebook3rdquarter2017}. Dialogflow is an application that manages the backend of a chatbot and it is another tool to help businesses create chatbots rapidly.
+A developer uses their services to create scenarios and prepares the answers. The application will then take care of all of the natural language processing (NLP) and provide an intelligent conversational agent.
 
 These commercial applications are possible thanks to the research done in both NLP and deep learning fields in recent years. The two main approaches to construct a chatbot are the rule-based approach and the generative approach.
-The first one exists for more than 20 years and has limitations. Developers write down all the possible sentences the chatbot can encounter and provide the related answer. The first main issue arises when the user does not use the exact same vocabulary or write a sentence differently from what the developer planned and the chatbot is no longer able to answer.
-One of the technics used for these type of chatbot is known as the Artificial Intelligence Markup Language (AIML). As a markup language, developers write questions and the adequate answers in a file read by the AIML engine to interact with the user.
+The first one has existed for more than 20 years and has limitations. Developers write down all of the possible sentences that the chatbot can encounter and the related answer. The first main issue arises when the user does not use the exact same vocabulary, or writes a sentence differently from what the developer has planned. In these instances, the chatbot is no longer able to answer.
+One of the technics used for these types of chatbots is known as the Artificial Intelligence Markup Language (AIML). As a markup language, developers write questions and the adequate answers in a file.
 
 The generative approach has appeared recently and taken advantage of the progress in Machine Learning (ML) and more particularly of Deep Neural Networks (DNN). The idea of the generative models uses the underlying idea of any ML models; given a large dataset, the model is able to learn from the data and predict a value for any input.
-Basically, when a user sends a text to a chatbot, the text becomes the input of the ML model which generates an answer based on what it learned, and the chatbot responds to the user.
-The main advantage, which also answers the main issue of the rule-based approach, is that the model does not need the exact intended text, it can understand synonyms, different sentence constructions and still understand the intent of the user.
-However, the main disadvantage is the quantity of data needed to train a DNN model. Millions of examples are needed to train a robust generative model.
+Basically, when a user sends a text to a chatbot, the text becomes the input of the ML model, which generates an answer based on what it learned. The chatbot then responds to the user.
+The main advantage, which also answers the main issue of the rule-based approach, is that the model does not need the exact intended text. This model understands synonyms and different sentence compositions, therefore increasing the probability of understading the user's intended message.
+The main disadvantage of this approach is the quantity of data needed to train a DNN model. Millions of examples are needed to train a robust generative model.
 
-This thesis is done for a startup based at EPFL that innovates in the way managers interact with and manage their teams.
-Understanding what is today possible to do with chatbots is important to help the startup refine its value proposition and build a roadmap for what will be possible tomorrow.
+This thesis is done for a startup based at EPFL that innovates in the way managers may interact with and manage their teams.
+Understanding what is possible when using chatbots is important to help the startup refine its value proposition and build a roadmap for what will be possible tomorrow.
 
-The first chapter introduces the thesis topic and the aim of this work. Then, the second chapter presents a literature review of what is today done with conversational agents, and theory on recurrent neural networks, neural machine translation, and advanced conversational agents.
-The third chapter presents how the thesis experiments different technics to build a chatbot using an end-to-end architecture and on which data the experiments are based on. The fourth chapter shows the results of the different experiments and comments them.
-Finally, the fifth chapter brings a discussion by comparing the theory and the experiments' results and aims at proposing future work.
+The first chapter introduces the thesis topic and the aim of this work. The second chapter presents a literature review of what is done with conversational agents today, and dicusses theories surrounding recurrent neural networks, neural machine translation, and advanced conversational agents.
+The third chapter presents which dataset is used during the experiments and how to construct a chatbot using an end-to-end architecture. The fourth chapter discusses the results of the different experiments.
+Finally, the fifth chapter compares the theory and the experiments' results and aims at proposing future work.

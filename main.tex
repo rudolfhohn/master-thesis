@@ -69,7 +69,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{listings}
 
 \usepackage{tabularx}
-\usepackage{multirow}
+\usepackage{makecell,multirow}
 \usepackage{subcaption}
 \usepackage{float}
 
@@ -109,18 +109,19 @@ headsepline, % Uncomment to get a line under the header
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Exploration of Artifical Intelligence Technics for Conversational Agents} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitle{Exploration of Artifical Intelligence Technics for the Construction of Conversational Agents} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 % \thesistitle{Statistical learning models to determine Employee Engagement in the workplace} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 \supervisor{Dr. Guido \textsc{Bologna}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 \examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
-\degree{Master of Science} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
+\degree{Master of Science HES-SO in Engineering} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
 \author{Rudolf \textsc{Höhn}} % Your name, this is used in the title page and abstract, print it elsewhere with \authorname
 \addresses{} % Your address, this is not currently used anywhere in the template, print it elsewhere with \addressname
 
 \subject{Computer Science} % Your subject area, this is not currently used anywhere in the template, print it elsewhere with \subjectname
 \keywords{} % Keywords for your thesis, this is not currently used anywhere in the template, print it elsewhere with \keywordnames
 \university{\href{https://www.hes-so.ch}{University of Applied Sciences Western Switzerland}} % Your university's name and URL, this is used in the title page and abstract, print it elsewhere with \univname
-\department{Engineering} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+% \department{Engineering} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
+\department{} % Your department's name and URL, this is used in the title page and abstract, print it elsewhere with \deptname
 \faculty{Major in Information and Communication Technology} % Your research group's name and URL, this is used in the title page, print it elsewhere with \groupname
 \group{Complex Information Systems} % Your faculty's name and URL, this is used in the title page and abstract, print it elsewhere with \facname
 
@@ -229,22 +230,45 @@ headsepline, % Uncomment to get a line under the header
 % %----------------------------------------------------------------------------------------
 % %	ABSTRACT PAGE
 % %----------------------------------------------------------------------------------------
-%
-% \begin{abstract}
-% \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-% Employee Engagement is becoming a priority for managers. They understand that engaged collaborators are motivated in their work, enjoy their work and are absorbed by their work, which leads to better overall performance for the company and a higher customer satisfaction. In the context of industry 4.0, answering surveys is not enough to measure effectively the engagement and to boost it. This project shows that it is possible to overcome this limitation and to detect if one is the engagement level with the technics used in Sentiment Analysis. However, further work is required to create a model with a bigger dataset and more complex, for instance with deep neural networks.
-%
-% \end{abstract}
-%
-% %----------------------------------------------------------------------------------------
-% %	ACKNOWLEDGEMENTS
-% %----------------------------------------------------------------------------------------
-%
-% \begin{acknowledgements}
-% \addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
-% The acknowledgments and the people to thank go here, don't forget to include your project advisor\ldots
-% \end{acknowledgements}
-%
+
+\begin{abstract}
+\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
+
+Conversational agents (chatbots) have increased in popularity for the past 2 years. Businesses have a new way of communicating with their customers but must face challenges.
+This thesis aims at presenting different Artifical Intelligence approaches, namely the rule-based approach and the generative approach, to constructing a chatbot.
+The first chatbot was created in 1966 but since then, many improvements in Natural Language Processing and Machine Learning have led to the powerful chatbots known today as Alexa or Siri.
+
+Recurrent Neural Networks (RNNs) have proved to be very efficient in number of tasks including machine translation, text summarization or conversational agent. Sequence-to-Sequence (Seq2Seq) is a model architecture divided into two disctint parts, namely the encoder and the decoder, both containing RNN cells.
+The encoder creates an abstract representation of a sequence and the decoder uses this representation to output another sequence of text. Using this mechanism, Neural Machine Translation (NMT) model is able to translate texts in a very effective way. In addition, NMT is also able to construct a chatbot and converse.
+
+The different experiments aim at understanding the state of the art of chabot models and aim also at providing information on what is today feasible.
+The experiments illustrated models that are able to construct grammatically correct sentences, but occasionally sentences that were inconsistent with the question.
+However, Cornell Movie Dialogs corpus, the dataset used for the experiment, is between 1\% and 10\% the size of other datasets used to train more robust chatbots.
+Besides from the dataset, some parameters create better models. For example, a model with two hidden layers performs better that a model with four or eight hidden layers.
+
+This thesis proposes multiple ways to improve the models performances and present alternatives to the NMT model. The thesis then advises businesses on how they should behave with this new technology.
+
+\end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\begin{acknowledgements}
+\addchaptertocentry{\acknowledgementname} % Add the acknowledgements to the table of contents
+
+Guido, support, realistic and pragmatic advices
+
+hepia+Nabil for paperspace
+
+Alex for reading proof
+
+Elodie
+
+Family
+
+\end{acknowledgements}
+
 % ----------------------------------------------------------------------------------------
 % 	LIST OF CONTENTS/FIGURES/TABLES PAGES
 % ----------------------------------------------------------------------------------------
@@ -274,6 +298,7 @@ headsepline, % Uncomment to get a line under the header
 \textbf{ML} & \textbf{M}achine \textbf{L}earning\\
 \textbf{NLP} & \textbf{N}atural \textbf{L}anguage \textbf{P}rocessing\\
 \textbf{NMT} & \textbf{N}eural \textbf{M}achine \textbf{T}ranslation\\
+\textbf{NN} & \textbf{N}eural \textbf{N}etwork\\
 \textbf{NNLM} & \textbf{N}eural \textbf{N}etwork \textbf{L}anguage \textbf{M}odel\\
 \textbf{RNN} & \textbf{R}ecurrent \textbf{N}eural \textbf{N}etwork\\
 \textbf{SOS} & \textbf{S}tart \textbf{O}f \textbf{S}equence\\

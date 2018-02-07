@@ -18,7 +18,7 @@ Raw string sentence is preprocessed in order to give the encoder, and the decode
     \label{fig:preprocess}
 \end{figure}
 
-Secondly, from the tokenized sentences, the preprocessor extracts the vocabulary (i.e. all the tokens with the number of times it appears). Table~\ref{tab:src-vocab} summarizes source vocabulary and Table~\ref{tab:tgt-vocab} summarizes target vocabulary.
+Secondly, from the tokenized sentences, the preprocessor extracts the vocabulary (i.e. all of the tokens with the number of times it appears). Table~\ref{tab:src-vocab} summarizes source vocabulary and Table~\ref{tab:tgt-vocab} summarizes target vocabulary.
 Published work shows that people tend to limit the vocabulary. For example, \citet{1508.04025}, with a dataset of 4.5M sentence pairs (20 times the size of Cornell Movies Dialogs corpus), the vocabulary was limited to the 50K most frequent words. Additionally, in \citet{1506.06714}, with a dataset of 12M sentences, the vocabulary was also limited to the 50K most frequent words.
 Table~\ref{tab:reduce-vocab} illustrates how both vocabularies can be reduced by using a threshold on word counts and only keep the most frequent ones.
 In~\citet{1506.05869}, two different datasets were used. The first dataset contained 33M sentences and the vocabulary was limited to 20K words, and in the second dataset, composed of 88M sentences, the vocabulary was limited to 100K words.
@@ -85,20 +85,21 @@ Target sentences need to be padded with Start-Of-Sequence (SOS) and End-Of-Seque
 The source and target vocabularies present similar statistics because of the fact that most of the conversations present in the corpus have multiple turns. Thus, for example, conversation \code{[A, B, C, D]} is fed into the training set as \code{[(A, B), (B, C), (C, D)]} which makes \code{[B, C]} appear in both source and target sets.
 
 \section{Tensorflow and Neural Machine Translation tutorial}
-The models' training was done using the NMT tutorial script by~\citet{tensorflow.nmt}. The authors use the Tensorflow~\citep{tensorflow2015-whitepaper} open-source library made ``\textit{for numerical computation using data flow graphs}''. Tensorflow simplifies development tasks in a machine-learning project. The developer creates his model as a graph, where nodes are operations and edges are matrices (tensors). From this graph definition of the mathematical model, Tensorflow automatically calculates the gradients and the derivatives needed for backpropagation.
+The models' training has been done using the NMT tutorial script by~\citet{tensorflow.nmt}. The authors use the Tensorflow~\citep{tensorflow2015-whitepaper} open-source library made ``\textit{for numerical computation using data flow graphs}''. Tensorflow simplifies development tasks in a machine-learning project. The developer creates his model as a graph, where nodes are operations and edges are matrices (tensors). From this graph definition of the mathematical model, Tensorflow automatically calculates the gradients and the derivatives needed for backpropagation.
 Another advantage to use Tensorflow is that it runs on either CPUs or GPUs without changing a line of code. The same code is used when the engineer works locally on its machine and when the model is trained on servers with dedicated GPU cards.
 
-The NMT tutorial script was written to let people create and train an NMT model without having to spend time coding and debugging the algorithms. The script is part of a 5 years long Ph.D. thesis \citep{nmt-phd}. The script has 65 different arguments, detailed in Appendix~\ref{AppendixA}, going from the type of RNN to the attention's type of architecture. Despite the lack of coding, if one uses the script, it has to fully understand all the arguments and how they modify the model in order to train  it correctly.
+The NMT tutorial script was written to let people create and train an NMT model without having to spend time coding and debugging the algorithms. The script is part of a 5 years long Ph.D. thesis \citep{nmt-phd}. The script has 65 different arguments, detailed in Appendix~\ref{AppendixA}, going from the type of RNN to the attention's type of architecture.
+% Despite the lack of coding, if one uses the script, it has to fully understand all of the arguments and how they modify the model in order to train  it correctly.
 
 \section{Experiments}
-
-There are five main experiments that establish at the end the model parameters to create a chatbot based on the Cornell Movie Dialogs corpus. Among all the experiments, except if specified, the dataset (i.e. training, development and test sets), model parameters specified in Table~\ref{tab:runs-shared-param} and the seed for model initialization are kept unchanged to avoid biases and to measure effectively the different models' performances.
+% the dataset (i.e. training, development and test sets),
+There are five main experiments that establish at the end the model parameters to create a chatbot based on the Cornell Movie Dialogs corpus. Among all of the experiments, except if specified, model parameters specified in Table~\ref{tab:runs-shared-param} and the seed for model initialization are kept unchanged to avoid biases and to measure effectively the different models' performances. The datasets used for the different experiments are presented in Table~\ref{tab:datasets}.
 
 \begin{table}
     \centering
-    \caption[Runs' shared parameters]{Runs' shared parameters amongst all the experiments.}
+    \caption[Runs' shared parameters]{Runs' shared parameters amongst all of the experiments.}
     \label{tab:runs-shared-param}
-    \begin{tabular}{ll p{.5\textwidth}}
+    \begin{tabular}{lr p{.5\textwidth}}
         \toprule
         \tabhead{Parameter} & \tabhead{Value} & \tabhead{Comment}\\
         \midrule
@@ -114,7 +115,22 @@ There are five main experiments that establish at the end the model parameters t
     \end{tabular}
 \end{table}
 
-The models' name follows a writing convention to allow the reader to instantly know the parameters used to train a particular model. All the names have the same skeleton, the parameters are separated by a dash. Table~\ref{tab:run-name-desc} illustrates the different fields by decomposing as example ``run-20171212014119-norev-l8-u256-clstm-lr01-bw0-voc5''.
+\begin{table}
+    \centering
+    \caption[Datasets used during experiments]{Datasets used during the experiments. All numbers represent elements either of the vocabulary or the set.}
+    \label{tab:datasets}
+    \begin{tabular}{lrrrrr}
+        \toprule
+        \tabhead{Name} & \tabhead{Voc input} & \tabhead{Voc output} & \tabhead{Train} & \tabhead{Development} & \tabhead{Test}\\
+        \midrule
+        20171212014119 & \num{64839} & \num{65875} &  \num{219030} & \num{1515} & \num{734}\\
+        20171212014119-voc5 & \num{16456} & \num{16724} &  \num{219030} & \num{1515} & \num{734}\\
+        20180119152007-voc5 & \num{16458} & \num{16726}  & \num{177023} & \num{22095} & \num{22161}\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The models' name follows a writing convention to allow the reader to instantly know the parameters used to train a particular model. All of the names have the same skeleton, the parameters are separated by a dash. Table~\ref{tab:run-name-desc} illustrates the different fields by decomposing as example ``run-20171212014119-norev-l8-u256-clstm-lr01-bw0-voc5''.
 \begin{table}
     \centering
     \caption[Run name description]{Run name description. Example with run-20171212014119-norev-l8-u256-clstm-lr01-bw0-voc5.}
@@ -130,7 +146,7 @@ The models' name follows a writing convention to allow the reader to instantly k
         \code{clstm} & RNN used, here LSTM \\
         \code{lr01} & Learning rate, here $0.1$ \\
         \code{bw0} & Beam width, here 0 so the decoding process uses greedy search \\
-        \code{voc5} & The count threshold used to filter out rare words from the vocabulary. If ``voca'', all the vocabulary is used \\
+        \code{voc5} & The count threshold used to filter out rare words from the vocabulary. If ``voca'', all of the vocabulary is used \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -156,8 +172,8 @@ This experiment is focused on the neural network parameters. The exhaustive list
     \end{tabular}
 \end{table}
 
-Table~\ref{tab:run01-describe} shows the statistics for all the 72 models. The first surprising thing to notice is the low BLEU scores. The maximum development BLEU is \num{0.4} and the maximum test BLEU is \num{0.2}, knowing that BLEU score $\in [0, 100]$.
-The second thing to notice is that the perplexities vary significatively. The difference between the mininimum and the maximum is of \num{342}. However, the third quartile is close to the maximum showing that at least 25\% of the different parameters combinations lead to bad performance.
+Table~\ref{tab:run01-describe} shows the statistics for all of the 72 models. The first surprising thing to notice is the low BLEU scores. The maximum development BLEU is \num{0.4} and the maximum test BLEU is \num{0.2}, knowing that BLEU score $\in [0, 100]$.
+The second thing to notice is that the perplexities vary significatively. The difference between the mininimum and the maximum is of \num{342}. However, the third quartile is close to the maximum showing that at least 25\% of the different parameters combinations led to bad performance.
 The average time of training is about 70 minutes and the total training time is 85 hours (3 days and 13 hours). The models presenting the minimum perplexities and maximum BLEU score are described in Table~\ref{tab:run01-best-models}.
 \begin{table}
     \centering
@@ -181,7 +197,7 @@ The average time of training is about 70 minutes and the total training time is 
     \end{tabular}
 \end{table}
 
-Since Table~\ref{tab:run01-best-models} shows four different models for the four metrics and no decision can be made on which parameters trains the best model, Table~\ref{tab:run01-best-models-details} shows all the metrics for all the four models. There are no apparent best parameters based on these measures. The only shared parameter is that two layers seem to work the best.
+Since Table~\ref{tab:run01-best-models} shows four different models for the four metrics and no decision can be made on which parameters train the best model, Table~\ref{tab:run01-best-models-details} shows all of the metrics for all of the four models. There are no apparent best parameters based on these measures. The only shared parameter is that two layers seem to work the best.
 
 \begin{table}
     \centering
@@ -212,7 +228,7 @@ Since Table~\ref{tab:run01-best-models} shows four different models for the four
 
 The question still to be answered is which parameter influences the most the performance of the model.
 Figure~\ref{fig:res_run01_bw_ppl}, Figure~\ref{fig:res_run01_c_ppl}, Figure~\ref{fig:res_run01_l_ppl}, Figure~\ref{fig:res_run01_lr_ppl} and Figure~\ref{fig:res_run01_u_ppl} illustrates the models' test perplexity against the different parameters.
-The models number is not a model ID. If two different runs have the same number, it means that they share all the parameters except the one analyzed.
+The models number is not a model ID. If two different runs have the same number, it means that they share all of the parameters except the one analyzed.
 Based on the figures, the beam-width and the RNN does not influence the performance of the model. However, the greater learning rate and the greater number of units improve the model. At contrary, a deeper network (i.e. more layers) decreases the performance.
 
 The best model chosen for this experiment is ``run-20171212014119-norev-l2-u128-clstm-lr10-bw0-voca''.
@@ -261,7 +277,7 @@ Only words appearing more than five times in the training set are kept. As menti
 
 By comparing Table~\ref{tab:run02-describe} and Table~\ref{tab:run01-describe}, the mean test perplexity in experiment 2 reduced by 52.53\% and the minimum test perplexity reduced by 25.33\%.
 \citet{nlp-jurasky-4.4} stated in their defition of perplexity that models can be measured correctly only if their vocabulary is the same. Intuitively, seeing the perplexities reduced is only the result of a smaller vocabulary since the model is less proabable of mistaken. Despite this, the BLEU score kept the same value as during experiment 1.
-Limiting the vocabulary might lead to better results, but Human evaluation is needed to verify this assumption. Table~\ref{tab:run02-best-models-details} shows the best models for all the four metrics.
+Limiting the vocabulary might lead to better results, but human evaluation is needed to verify this assumption. Table~\ref{tab:run02-best-models-details} shows the best models for all of the four metrics.
 
 \begin{table}
     \centering
@@ -422,14 +438,15 @@ Table~\ref{tab:run03-best-models-details} shows the best models for each one of 
 \end{landscape}
 
 \subsection{Experiment 4 - Attention mechanism}
-In their results, \citet{1508.04025} show that for long sentences (between 30 and 70 words), the attention models keep track of the information whereas models without attention show catastrophic results. Moreover, even for short sentences, attention models outperform the model without attention. From that observation, it would be interesting to measure if the attention mechanism increases the performance of the chatbot as well. However, \citet{1506.05869}, building a neural conversation machine, reported that adding the attention mechanism \citep{1409.0473} did not improve the perplexity on either training or validation sets.
+In their results, \citet{1508.04025} show that for long sentences (between 30 and 70 words), the attention models keep track of the information whereas models without attention show catastrophic results. Moreover, even for short sentences, attention models outperform the model without attention. From that observation, it would be interesting to measure if the attention mechanism increases the performance of the chatbot as well. However, \citet{1506.05869}, constructing a neural conversation machine, reported that adding the attention mechanism \citep{1409.0473} did not improve the perplexity on either training or validation sets.
 
 There are two different attention mechanisms tested in this experiment, namely the ``luong'' (described in Chapter~\ref{Chapter2}, \citet{nmt-phd}) and ``scaled-luong''. The second attention mechanism is almost the same as the first with the exception that it is using a weight normalization inspired from \citet{1602.07868}. Reparameterizing the weights allow the model to converge faster in a stochastic gradient descent.
 
 Experiment 4 only keeps the best value for the parameters \textit{``learning rate''} and \textit{``layers''} found in the three previous experiments. The learning is fixed to \num{1.0} and the number of layers is fixed to \num{2}.
 Moreover, since the number of units kept improving the results, instead of testing on ``64'', ``128'' and ``256'', experiment 4 uses the values ``256'', ``384'' and ``512''. In total, during this experiment, 12 models were trained, in 9 hours.
 
-Table~\ref{tab:run04-describe} describes the statistics around the experiment 4 training. Since two parameters were chosen following the three previous experiments, the standard deviation for all the metrics is significantly reduced. Comparing with the results from the previous experiment, the mean test perplexity increased of \num{2.21} points and the test BLEU metric is now only \num{0.00}. The attention mechanism increases the number of learnable parameters and this might mean that there is not enough data to also train the attention weights.
+Table~\ref{tab:run04-describe} describes the statistics around the experiment 4 training. Since two parameters were chosen following the three previous experiments, the standard deviation for all of the metrics is significantly reduced. Table~\ref{tab:run04-best-models-details} present the best models of the experiment.
+Comparing with the results from the previous experiment, the mean test perplexity increased of \num{2.21} points and the test BLEU metric is now only \num{0.00}. The attention mechanism increases the number of learnable parameters and this might mean that there is not enough data to also train the attention weights.
 
 \begin{table}
     \centering
@@ -438,7 +455,30 @@ Table~\ref{tab:run04-describe} describes the statistics around the experiment 4 
     \input{Tables/run04-describe}
 \end{table}
 
-Figure~\ref{fig:res_run04_bw_ppl}, Figure~\ref{fig:res_run04_u_ppl} and Figure~\ref{fig:res_run04_at_ppl} illustrates the models behaviour following different parameters' values. As for all other previous experiments, the beam width does not decrease or increase by itself the performance of the models. As suspected, adding more units to the model lead to better results. However, the difference in performance from experiments 1, 2 or 3 between 64 units and 256 units is now less visible between 256 units and 512 units. Finally, the different attention strategies do not seem to have an impact themselves on the models' performances.
+\begin{table}
+    \centering
+    \caption[Experiment 4 best models]{Experiment 4 best models with development and testing perplexities and BLEU score metrics.}
+    \label{tab:run04-best-models-details}
+    \begin{tabular}{rrrr}
+        \toprule
+        \tabhead{dev\_ppl} & \tabhead{dev\_bleu} & \tabhead{test\_ppl} & \tabhead{test\_bleu}\\
+        \midrule
+        \multicolumn{4}{l}{\textit{run-20171212014119-rev-l2-u384-clstm-lr10-bw3-atscaledluong}}\\
+        \num{66.07} & \num{0.00} & \num{52.74} & \num{0.00}\\
+        \hline
+
+        \multicolumn{4}{l}{\textit{run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong}}\\
+        \num{67.00} & \num{0.10} & \num{52.56} & \num{0.00}\\
+        \hline
+
+        \multicolumn{4}{l}{\textit{run-20171212014119-rev-l2-u256-clstm-lr10-bw0-atluong}}\\
+        \num{68.23} & \num{0.10} & \num{54.20} & \num{0.20}\\
+
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Figure~\ref{fig:res_run04_bw_ppl}, Figure~\ref{fig:res_run04_u_ppl} and Figure~\ref{fig:res_run04_at_ppl} illustrates the models behaviour following different parameters' values. As for all other previous experiments, the beam width does not decrease or increase by itself the performance of the models. As suspected, adding more units to the model led to better results. However, the difference in performance from experiments 1, 2 or 3 between 64 units and 256 units is now less visible between 256 units and 512 units. Finally, the different attention strategies do not seem to have an impact themselves on the models' performances.
 
 The model having the best test perplexity is ``run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong''.
 
@@ -484,7 +524,27 @@ Besides the evaluation metrics, the time needed to train a model is longer. The 
     \input{Tables/run05-describe}
 \end{table}
 
-To keep consistency with the choice of the best model for the experiment, ``run-20180119152007-rev-l2-u512-clstm-lr10-bw3-atluong'' is chosen based on the test perplexity even if its BLEU score is interesting.
+\begin{table}
+    \centering
+    \caption[Experiment 5 best models]{Experiment 5 best models with development and testing perplexities and BLEU score metrics.}
+    \label{tab:run05-best-models-details}
+    \begin{tabular}{rrrr}
+        \toprule
+        \tabhead{dev\_ppl} & \tabhead{dev\_bleu} & \tabhead{test\_ppl} & \tabhead{test\_bleu}\\
+        \midrule
+        \multicolumn{4}{l}{\textit{run-20180119152007-rev-l2-u512-clstm-lr10-bw3-atluong}}\\
+        \num{64.26} & \num{0.10} & \num{64.85} & \num{0.10}\\
+        \hline
+
+        \multicolumn{4}{l}{\textit{run-20180119152007-rev-l2-u512-clstm-lr10-bw0-atluong}}\\
+        \num{66.25} & \num{0.20} & \num{67.26} & \num{0.20}\\
+        \hline
+
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Table~\ref{tab:run05-best-models-details} presents the best models of this experiments. To keep consistency with the choice of previous best models, ``run-20180119152007-rev-l2-u512-clstm-lr10-bw3-atluong'' is chosen based on the test perplexity even if its BLEU score is interesting.
 
 \subsection{Experiment 6 - GPU performance test}
 In the previous chapter, Table~\ref{tab:paperspace-flavors} showed that the ``\textit{V100}'' flavor costs more than 6 times the flavor used for experiments 1 to 5 for a theoretical gain in performance of around 43 times (2.6 teraFLOPS against 112 teraFLOPS). This experiment compares the training time for an exact same model on both flavors to bring the needed information for decision-makers.
@@ -513,7 +573,7 @@ This section illustrates how the chatbots actually converse. Since experiment 6 
 First, almost all models answers ``Hello !'' with a ``Hi .'', and all models answer ``No .'' to the question ``Are you a follower or a leader'' and ``What ?'' to the affirmation ``Done .''. This shows that NMT is able to learn some basics independently from the models' parameters.
 However, the attention mechanism seems to add more sense to the answers. Typically, in the question ``How are you ?'', both attention-based models answer that they are fine whereas other models do not understand the question.
 
-Secondly, the vocabulary plays an important role in the decoding process and it is witness with all the ``<unk>'' tokens in questions such as ``What's your name'' or ``Where are you from''. Personal question learned from more than 9k movie characters is indeed difficult and there are high chances that some words in these particular questions appear less than 5 times (which is the threshold to keep or not a word in the vocabulary).
+Secondly, the vocabulary plays an important role in the decoding process and it is witness with all of the ``<unk>'' tokens in questions such as ``What's your name'' or ``Where are you from''. Personal question learned from more than 9k movie characters is indeed difficult and there are high chances that some words in these particular questions appear less than 5 times (which is the threshold to keep or not a word in the vocabulary).
 
 Finally, even if the models presented in this section have respectively the best test perplexity in their experiments, the answers are still not very convincing.
 
@@ -521,16 +581,16 @@ Finally, even if the models presented in this section have respectively the best
 % \begin{longtable}{p{.3\textwidth} p{.1\textheight} p{.2\textheight} p{.35\textheight}}
 \begin{longtable}{r|cl}
 
-    \caption[Inference results from best experiments' models]{Inference results from best experiments' models. For each experiment, the best model is picked and is given the same 10 questions or situations. Models used by experiment: (1)~run-20171212014119-norev-l2-u128-clstm-lr10-bw0-voca (2)~run-20171212014119-norev-l2-u256-clstm-lr10-bw0-voc5 (3)~run-20171212014119-rev-l2-u256-clstm-lr10-bw0-voc5 (4)~run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong (5)~run-20180119152007-rev-l2-u512-clstm-lr10-bw3-atluong.}
+    \caption[Inference results from best experiments' models]{Inference results from best experiments' models. For each experiment, the best model is picked and is given the same 10 questions or situations. E=Experiment. Models used by experiment: (1)~run-20171212014119-norev-l2-u128-clstm-lr10-bw0-voca (2)~run-20171212014119-norev-l2-u256-clstm-lr10-bw0-voc5 (3)~run-20171212014119-rev-l2-u256-clstm-lr10-bw0-voc5 (4)~run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong (5)~run-20180119152007-rev-l2-u512-clstm-lr10-bw3-atluong.}
     \label{tab:res-inference}\\
     % \begin{tabular}{l|ll}
 
     \toprule
-    \tabhead{Input} & \tabhead{Experiment} & \tabhead{Output} \\
+    \tabhead{Input} & \tabhead{E} & \tabhead{Output} \\
     \midrule
     \endfirsthead
     \toprule
-    \tabhead{Input} & \tabhead{Experiment} & \tabhead{Output} \\
+    \tabhead{Input} & \tabhead{E} & \tabhead{Output} \\
     \midrule
     \endhead
       \midrule
@@ -615,20 +675,24 @@ Finally, even if the models presented in this section have respectively the best
 
 
 \section{Human evaluation}
-In Section~\ref{sec:inference}, having based the best model selection on the test perplexity did not lead to models capable of real conversations. Thus, this section is aiming at showing the best models, not based on the perplexity, but on the perception of comprehension of a Human. In other terms, the chatbot is chosen only if its answers make sense.
+In Section~\ref{sec:inference}, having based the best model selection on the test perplexity did not lead to models capable of real conversations. Thus, this section is aiming at showing the best models, not based on the perplexity, but on the perception of comprehension of a human. In other terms, the chatbot is chosen only if its answers make sense.
 
-There are two models having quite good conversation skills amongst all the trained models, namely ``run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca'' and ``run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong-voc5''. Table~\ref{tab:res-inference-human} shows the conversation skills of both models on the same inference set than in the previous section.
+There are two models having quite good conversation skills amongst all of the trained models, namely ``run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca'' and ``run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong-voc5''. Table~\ref{tab:res-inference-human} shows the conversation skills of both models on the same inference set than in the previous section.
 
 Besides all expectations, the most ``human'' model has neither a limited vocabulary nor reverse input sentence or even attention mechanism. Thus, the perplexity might mean that the optimization is closer to its minima, but it does not mean that the chatbot does its job correctly.
 
 \begin{table}
 
-    \caption[Best models inference from Human evaluation]{Inference results from best models from Human evaluation. (1)~run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca (2)~run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong-voc5.}
+    \caption[Best models inference from human evaluation]{Inference results from best models from human evaluation. E=Experiment. (1)~run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca (2)~run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong-voc5.}
     \label{tab:res-inference-human}
-    \begin{tabular}{r|cl}
+
+    \setcellgapes{4pt}
+    \makegapedcells
+
+    \begin{tabular}{r|cp{.4\textwidth}}
 
         \toprule
-        \tabhead{Input} & \tabhead{Experiment} & \tabhead{Output} \\
+        \tabhead{Input} & \tabhead{E} & \tabhead{Output} \\
         \midrule
 
         \multirow{2}{*}{Hello !} & 1 & Hi .\\
@@ -648,7 +712,7 @@ Besides all expectations, the most ``human'' model has neither a limited vocabul
 
         \hline
         \multirow{2}{*}{My name is Rudolf . What is my name ?} & 1 & Captain .\\
-        & 2 & Hi . Hi . Hi . Hi . How's business .\\
+        & 2 & Hi . Hi . Hi . Hi . How's business.\\
 
         \hline
         \multirow{2}{*}{What is your job ?} & 1 &  What ?\\
@@ -669,6 +733,68 @@ Besides all expectations, the most ``human'' model has neither a limited vocabul
         \hline
         \multirow{2}{*}{This car was driving too fast !} & 1 &  What ?\\
         & 2 & What ? \\
+
+        \bottomrule
+
+    \end{tabular}
+\end{table}
+
+Table~\ref{tab:res-inference-training} illustrates inference results from training set samples. The goal of these tests is to observe what the model has learned and if behaviours from unseen data is happening also with seen data.
+The models used are the same as in Table~\ref{tab:res-inference-human}. First, the decoded sequences are not the target sequences. Secondly, same patterns are also seen in these conversations. For example, if the model seems to not understand the input, it answers ``\textit{What ?}''.
+Lastly, the attention mechanism seems to add more diversity in the model's answers.
+
+\begin{table}
+
+    \caption[Best models from human evaluation inference on training set samples]{Best models from human evaluation inference on training set samples.  E=Experiment. (1)~run-20171212014119-norev-l2-u256-clstm-lr10-bw3-voca (2)~run-20171212014119-rev-l2-u512-clstm-lr10-bw0-atluong-voc5.}
+    \label{tab:res-inference-training}
+
+    \setcellgapes{7pt}
+    \makegapedcells
+
+    \begin{tabular}{p{.6\textwidth}|cp{.37\textwidth}}
+
+        \toprule
+        \tabhead{Input} & \tabhead{E} & \tabhead{Output} \\
+        \midrule
+
+        \multirow{2}{.6\textwidth}{Can we make this quick ? Roxanne Korrine and Andrew Barrett are having an incredibly horrendous public break - up on the quad . Again.} & 1 & What ?\\
+        & 2 & You were right .\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{Well , I thought we'd start with pronunciation , if that's okay with you .} & 1 & No.\\
+        & 2 & No .\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{Not the hacking and gagging and spitting part . Please .} & 1 & No .\\
+        & 2 & You were right .\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{You're asking me out . That's so cute . What's your name again ?} & 1 & Hi .\\
+        & 2 & Hi .\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{No , no , it's my fault -- we didn't have a proper introduction ---} & 1 & No ?\\
+        & 2 & No , no , no .\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{Cameron .} & 1 &  What ?\\
+        & 2 & What ?\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{The thing is , Cameron -- I'm at the mercy of a particularly hideous breed of loser . My sister . I can't date until she does .} & 1 & What ?\\
+        & 2 & You're not gonna be a killer .\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{Why ?} & 1 & Because I don't know what you're talking about .\\
+        & 2 & Because I don't know what you're talking about .\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{Unsolved mystery . She used to be really popular when she started high school , then it was just like she got sick of it or something .} & 1 &  What ?\\
+        & 2 & What happened ?\\
+
+        \hline
+        \multirow{2}{.6\textwidth}{Gosh , if only we could find Kat a boyfriend ...} & 1 &  What ?\\
+        & 2 & No . \\
 
         \bottomrule
 

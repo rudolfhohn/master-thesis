@@ -43,10 +43,10 @@ The texts have very different lengths. Table~\ref{tab:stats-cornell} shows some 
 The general purpose of this chatbot is to learn how to converse with other humans based on the movie dialogs. The model's architecture follows the Neural Machine Translation (NMT) model.
 Instead of translating from a language to another, the model ``translates'' the question into an answer, since the input and output have the same form in both cases.
 
-Since dialogs in movies are open-domain conversations, just splitting the dataset into an 80-10-10 division (80\% training set, 10\% development set, 10\% test set, \citet{jurafsky2014speech})to train models might not work well. Thus, the idea is to find a closer domain even in this context by trying to train the model to act like one the movie character. To ensure that the training does not suffer from the lack of data, the character is chosen based on the number of conversations he is involved into. Table~\ref{tab:char-cornell} shows the five most present characters.
+Since dialogs in movies are open-domain conversations, just splitting the dataset into an 80-10-10 division (80\% training set, 10\% development set, 10\% test set, \citet{jurafsky2014speech})to train models might not work well. Thus, the idea is to find a closer domain even in this context by trying to train the model to act like one of the movie character. To ensure that the training does not suffer from the lack of data, the character is chosen based on the number of conversations he is involved into. Table~\ref{tab:char-cornell} shows the five most present characters.
 
 \begin{table}
-    \caption[Character presence analysis]{Character presence analysis within the Cornell Movie Dialogs corpus presenting the five most present character.}
+    \caption[Character presence analysis]{Character presence analysis within the Cornell Movie Dialogs corpus presenting the five most present characters.}
     \label{tab:char-cornell}
     \centering
     \begin{tabular}{llllll}
@@ -58,7 +58,7 @@ Since dialogs in movies are open-domain conversations, just splitting the datase
     \end{tabular}
 \end{table}
 
-In all the different runs, the training is done in two phases, namely the training, based on all the conversations, and the fine-tuning, based only on the conversations where the chosen character is answering. Other features like the gender of the character speaking first might lead to better results.
+In all of the different runs, the training is done in two phases, namely the training, based on all of the conversations, and the fine-tuning, based only on the conversations where the chosen character is answering. Other features like the gender of the character speaking first might lead to better results.
 
 
 \section{Infrastructures}

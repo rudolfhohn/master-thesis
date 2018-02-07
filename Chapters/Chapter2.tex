@@ -6,10 +6,10 @@
 
 \label{Chapter2} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-A conversational agent (chatbot) is intended to respond to a Human by taking advantage of all its knowledge, its capacity to detect sentiments or remember the context, or its ability to search information on the web. Chatbots tend to use text as input and output format, but it is also possible to use speech recognition and speech generation to allow users to speak while conversing.
+A conversational agent (chatbot) is intended to respond to a human by taking advantage of all its knowledge, its capacity to detect sentiments or remember the context, or its ability to search information on the web. Chatbots tend to use text as input and output format, but it is also possible to use speech recognition and speech generation to allow users to speak while conversing.
 
-\section{Different approaches to building conversational agents}
-Chatbots are created using two different approaches, namely the \textbf{Rule-based} approach and the \textbf{Generative} approach. The Rule-based approach, as its name indicates, uses rules to understand user input and pick from a list of answers a possible one. Rule-based chatbots exist since 1966 with the development of ELIZA chatbot in \citet{Weizenbaum:1966:ECP:365153.365168}. ELIZA's goal was to measure the psychological effects on Humans when they talk to a machine. Some of the test subjects found it really hard to believe that they were talking to a computer. ELIZA followed a script and analyzed user input to find keywords and to choose the proper answer. The workload for the developer was quite intensive and it would only take one situation that the developer might not have thought of and the user would understand he was not talking to a Human.
+\section{Different approaches to constructing conversational agents}
+Chatbots are created using two different approaches, namely the \textbf{Rule-based} approach and the \textbf{Generative} approach. The Rule-based approach, as its name indicates, uses rules to understand user input and pick from a list of answers a possible one. Rule-based chatbots exist since 1966 with the development of ELIZA chatbot in \citet{Weizenbaum:1966:ECP:365153.365168}. ELIZA's goal was to measure the psychological effects on humans when they talk to a machine. Some of the test subjects found it really hard to believe that they were talking to a computer. ELIZA followed a script and analyzed user input to find keywords and to choose the proper answer. The workload for the developer was quite intensive and it would only take one situation that the developer might not have thought of and the user would understand he was not talking to a human.
 
 The Generative approach is a machine learning (ML) model that takes advantage of the recent research and technology improvements enabling deep neural networks (DNN) model to be trained on large datasets. The main difference with the rule-based approach is that the chatbot learns and establishes its own rules based on the training dataset. Thus, generative models are less entitled to misunderstand the user but since they learn themselves the output sentences, they might generate them with punctuation errors, grammatical errors, or even generate incomprehensible sentences. Besides the generation problems, training deep neural networks is not an easy task and require high-performance hardware.
 
@@ -24,7 +24,7 @@ These two approaches are used in two different cases, closed-domain and open-dom
 \end{figure}
 
 \section{Rule-based models}
-In this section, two technics to build a rule-based model are presented, a markup language technic and a web-based development tool.
+In this section, two technics to construct a rule-based model are presented, a markup language technic and a web-based development tool.
 
 \subsection{Artificial Intelligence Markup Language}
 Artificial Intelligence Markup Language (AIML) is an XML-compliant language that simplifies the creation of rule-based chatbots \citep{wallace2005aiml}. The four main tags are described below.
@@ -35,7 +35,7 @@ Artificial Intelligence Markup Language (AIML) is an XML-compliant language that
     \item \textit{<template>}: what the chatbot answers
 \end{itemize}
 An example of a category, from ALICEbot, is shown in Listing~\ref{lst:aiml}.
-\begin{lstlisting}[language=XML, label={lst:aiml}]
+\begin{lstlisting}[caption={Example of anonymization}, language=XML, label={lst:aiml}]
 <category>
     <pattern>WHAT ARE YOU</pattern>
     <template>
@@ -47,7 +47,7 @@ An example of a category, from ALICEbot, is shown in Listing~\ref{lst:aiml}.
 \end{lstlisting}
 
 \citet{wallace2009anatomy} created a chatbot of approximately 41'000 categories called ALICE. A log extract of a conversation with ALICE is shown in Listing~\ref{lst:alice-log}.
-\begin{lstlisting}[label={lst:alice-log}]
+\begin{lstlisting}[caption={Example of anonymization},label={lst:alice-log}]
 judge: Hi alice
 ALICE: Hi there!
 judge: How are you ?
@@ -59,8 +59,8 @@ ALICE: Obama.
 \end{lstlisting}
 
 \subsection{Development tools for rule-based conversational agents}
-The interest around chatbots has risen since March 2016, as shown Figure~\ref{fig:trend_chatbot}. Different products appeared since then on the market to help businesses and privates build and deploy chatbots. One example is Dialogflow\footnote{\url{https://dialogflow.com/}} but most of the tools follow the same logic. The goal of Dialogflow is to understand the intent of the user and to trigger an action. The action can be a text response provided by Dialogflow or, Dialogflow can use a webhook and send the intents to a remote server that builds the response accordingly to users' intents.
-For example, a possible application would be a chatbot that tells a student where his next lecture is. Dialogflow understands the intent and forwards the request to the webhook. The webhook receives the intent and connects to the school servers to get the information and sends it back to the user. Figure~\ref{fig:dialogflow} shows the flow of interactions for a chatbot developed on Dialogflow.
+The interest around chatbots has risen since March 2016, as shown Figure~\ref{fig:trend_chatbot}. Different products appeared since then on the market to help businesses and privates construct and deploy chatbots. One example is Dialogflow\footnote{\url{https://dialogflow.com/}} but most of the tools follow the same logic. The goal of Dialogflow is to understand the intent of the user and to trigger an action. The action can be a text response provided by Dialogflow or, Dialogflow can use a webhook and send the intents to a remote server that constructs the response accordingly to users' intents.
+For example, a possible application would be a chatbot that tells a student where his next lecture is. Dialogflow understands the intent and forwards the request to the webhook. The webhook receives the intent and connects to the school servers to get the information. Then, Dialogflow sends it back to the user. Figure~\ref{fig:dialogflow} shows the flow of interactions for a chatbot developed on Dialogflow.
 
 \begin{figure}[b]
     \centering
@@ -78,14 +78,14 @@ For example, a possible application would be a chatbot that tells a student wher
     \label{fig:dialogflow}
 \end{figure}
 
-The strength of these tools is that they extract the intent of the user without being restricted to an exact sentence. These tools are sometimes called hybrid because they are in their core rule-based models, but use Natural Language Processing (NLP) to understand better the user. Thus, the chatbots are more reliable and therefore, become more interesting for companies like Swiss, Comcast, The Wall Street Journal or Mercedes-Benz \citep{dialogflow}. These chatbots are deployed over popular messaging platforms like Facebook Messenger or WhatsApp. Knowing the data policy of these messaging platforms, the privacy of the data is an important concern. However, for example, Facebook's spokeswoman said that Messenger does not read the messages between people and businesses and Facebook does not use the content of Messenger conversations for any type of advertising \citep{facebook-policy}.
+The strength of these tools is that they extract the intent of the user without being restricted to an exact sentence. These tools are sometimes called hybrid because they are in their core rule-based models, but use Natural Language Processing (NLP) to better understand the user. Thus, the chatbots are more reliable and therefore, become more interesting for companies like Swiss, Comcast, The Wall Street Journal or Mercedes-Benz \citep{dialogflow}. These chatbots are deployed over popular messaging platforms like Facebook Messenger or WhatsApp. Knowing the data policy of these messaging platforms, the privacy of the data is an important concern. However, for example, Facebook's spokeswoman said that Messenger does not read the messages between people and businesses and Facebook does not use the content of Messenger conversations for any type of advertising \citep{facebook-policy}.
 
 \section{Generative models}
 Generative conversation models are based on a learning process and need a large set of training data (e.g. \citet{1506.05869} used 62M sentences). Generative models are created using deep neural networks like Recurrent Neural Network (RNN) \citep{1503.02364,1506.05869}.
 
 \subsection{Vector representation of words}
 
-As RNNs take real vectors as inputs, the text sequence are represented as continuous vectors, known as word embeddings. A technic called word2vec \citep{1301.3781} proposes two log-linear models based on feedforward Neural Net Language Model (NNLM) to represent efficiently words in vector space. The first model architecture of word2vec is called the Continuous Bag-of-Words (CBOW) model and follow the feedforward NNLM architecture with one hidden layer.
+As RNNs take real vectors as inputs, the text sequences are represented as continuous vectors, known as word embeddings. A technic called word2vec \citep{1301.3781} proposes two log-linear models based on feedforward Neural Net Language Model (NNLM) to represent efficiently words in vector space. The first model architecture of word2vec is called the Continuous Bag-of-Words (CBOW) model and follow the feedforward NNLM architecture with one hidden layer.
 The idea behind is that we train a model to predict a word from a sentence using N words occurring before and N words occurring after the word in the sentence. Figure~\ref{fig:example_w2v} illustrates an example where the training sentence is \textit{``This corpus contains millions entities''} and N equals 2. Figure~\ref{fig:cbow} shows the CBOW architecture in a formal way.
 
 \begin{figure}
@@ -172,11 +172,11 @@ Figure~\ref{fig:lstm-cell} shows a graphical illustration of an LSTM cell.
 Dropout \citep{srivastava2014dropout} is a technic often used in neural network models to reduce the chance to overfit. The dropout randomly corrupts certain weights to force the model to learn more robustly. \citet{1409.2329} successfully applied dropout in their LSTM model by applying the dropout operator on the hidden states from the previous layer.
 
 \subsection{Neural Machine Translation}
-The Neural Machine Translation (NMT) model, proposed by~\citet{nmt-phd}, is inspired by the Sequence-to-Sequence (seq2seq) architecture. Seq2Seq) was first introduced by Google \citep{1409.3215} to be an end-to-end approach that makes only minimal assumptions on the sequence structure.
-Researchers observed that building end-to-end deep learning systems based on discriminative neural networks often work better with data minimally preprocessed~\citep{chen2015handbook}.
+The Neural Machine Translation (NMT) model, proposed by~\citet{nmt-phd}, is inspired by the Sequence-to-Sequence (Seq2Seq) architecture. Seq2Seq was first introduced by Google \citep{1409.3215} to be an end-to-end approach that makes only minimal assumptions on the sequence structure.
+Researchers observed that constructing end-to-end deep learning systems based on discriminative neural networks often work better with data minimally preprocessed~\citep{chen2015handbook}.
 In the use case of chatbots, the input and output sequences, or conversations, can have basically any length, only be tokenized, and the NN is able to learn. Seq2seq model takes the text as a time-series and uses RNN as the basic cell. Seq2Seq approach decomposes the architecture into two main parts, namely the encoder and the decoder. The encoder, initialized with random weights, takes as input a sequence of text and forms a fixed-size vector representation of it.
 The decoder, initialized with the last hidden state of the encoder, uses this abstract representation produced by the encoder to output the adequate output sentence. The fixed-size vector representation is meant for capturing relevant information from the input sentence.
-Figure~\ref{fig:seq2seqmodel} shows the seq2seq model architecture and Figure~\ref{fig:nmt} presents the workflow of an NMT model. The example shown is a translation problem, but NMT model architecture is used also for conversational agents or text summarization \citep{tensorflow.nmt}.
+Figure~\ref{fig:seq2seqmodel} shows the seq2seq model architecture.
 
 \begin{figure}
     \centering
@@ -186,18 +186,19 @@ Figure~\ref{fig:seq2seqmodel} shows the seq2seq model architecture and Figure~\r
     \label{fig:seq2seqmodel}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=.8\textwidth]{nmt_training_scheme}
-    \decoRule
-    \caption[Neural Machine Translation model scheme]{Neural Machine Translation model scheme \citep{tensorflow.nmt}. \textbf{(a)} \textit{Source input} refers to the input sequence tokenized to let the encoder read it token by token. \textbf{(b)} \textit{Target input} refers to the decoder input that lets the decoder have the correct $t-1$ token. \textbf{(c)} \textit{Embedding layer} refers to the feedforward neural network language model that creates words' vector representation. \textbf{(d)} \textit{Encoder} refers to stacked LSTMs used to build an abstract representation of the input sequence. \textbf{(e)} \textit{Decoder} refers to stacked LSTMs that produce the output sequence based on the abstract representation built by the encoder and on the previous target word. \textbf{(f)} \textit{Hidden layers} refer to the number of stacked RNN layers. \textbf{(g)} \textit{Projection layer} refers to the probability distribution of the predicted word, used to calculate the loss. \textbf{(h)} \textit{Decoder output} refers to the output sequence tokenized.}
-    \label{fig:nmt}
-\end{figure}
-
+Figure~\ref{fig:nmt} presents the workflow of an NMT model. The example shown is a translation problem, but NMT model architecture is used also for conversational agents or text summarization \citep{tensorflow.nmt}.
 Both the encoder and the decoder are RNNs: LSTMs \citep{1409.3215,1508.04025} or GRUs \citep{1706.05125,1503.02364}. These RNN models need as input fixed-size sentences but conversations have varying length. To face this issue, the sentences are padded with $0$ vectors to reach the size of the longest sentence of the training set. However, a lot of computation and memory is required to save vectors filled with zeros and train a model. This computation leak is resolved by bucketing the training set based on the length of the sentence.
 Bucketing means that the training set is partitioned into buckets containing sentences of approximately the same length. With buckets, sentences are still zero padded to the longest sentence of the bucket but it ensures that the padding is minimized.
 
 % \textbf{Calculate the number of parameters}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\textwidth]{nmt_training_scheme}
+    \decoRule
+    \caption[Neural Machine Translation model scheme]{Neural Machine Translation model scheme \citep{tensorflow.nmt}. \textbf{(a)} \textit{Source input} refers to the input sequence tokenized to let the encoder read it token by token. \textbf{(b)} \textit{Target input} refers to the decoder input that lets the decoder have the correct $t-1$ token. \textbf{(c)} \textit{Embedding layer} refers to the feedforward neural network language model that creates words' vector representation. \textbf{(d)} \textit{Encoder} refers to stacked LSTMs used to construct an abstract representation of the input sequence. \textbf{(e)} \textit{Decoder} refers to stacked LSTMs that produce the output sequence based on the abstract representation constructed by the encoder and on the previous target word. \textbf{(f)} \textit{Hidden layers} refer to the number of stacked RNN layers. \textbf{(g)} \textit{Projection layer} refers to the probability distribution of the predicted word, used to calculate the loss. \textbf{(h)} \textit{Decoder output} refers to the output sequence tokenized.}
+    \label{fig:nmt}
+\end{figure}
 
 % \textbf{Evaluation: loss, perplexity, cross-entropy, BLEU, being an active research topic today}
 The top layer of the decoder is fed to a softmax function to produce the predictive distribution. This distribution is used to extract the probability of every word being the target word or not, then the most probable word is chosen and output. To know how good a model works, the categorical cross-entropy is calculated between the target and decoded distribution and used as the loss function to backpropagate the error through the network.
@@ -211,20 +212,20 @@ In other words, minimizing the perplexity is the same as maximizing the probabil
     \label{equ:pp}
 \end{equation}
 
-Moreover, to measure how good a model actually generates words, the BLEU score, \citet{bleu-score}, is used. As opposed to the perplexity being an intrisic evaluation metric, the BLEU score is an extrinsic evaluation. The BLEU score measures the closeness of words between the decoded and target sentences using an n-gram precision.
+Moreover, to measure how good model actually generates words, the BLEU score, \citet{bleu-score}, is used. As opposed to the perplexity being an intrisic evaluation metric, the BLEU score is an extrinsic evaluation. The BLEU score measures the closeness of words between the decoded and target sentences using an n-gram precision.
 % \begin{equation}
 %     \mathrm{BLEU} = XX, \mathrm{BLEU} \in [0, 100]
 %     \label{equ:bleu}
 % \end{equation}
 In NMT, the BLEU score works well because a translation is often the same even with a different context. For example, ``maison'' in French will almost always be translated as ``house'' in English.
-However, when dealing with conversational agents, the context can vary a lot, from the way the user write to, for example, the weather. From this observation, \citet{1603.08023} showed that there is not currently a reliable method to measure the effectiveness of a chatbot, except the use of Human evaluators.
+However, when dealing with conversational agents, the context can vary a lot, from the way the user write to, for example, the precedent answer. From this observation, \citet{1603.08023} showed that there is not currently a reliable method to measure the effectiveness of a chatbot, except the use of human evaluators.
 
 Once the model is trained, there are mainly two approaches to decode a sentence, known as inference, namely the greedy search or the beam search. The greedy search takes the most probable output word at each timestep and fed it in the decoder's input at $t+1$. This approach is computationally efficient but does not yield great quality. Figure~\ref{fig:nmt-inference} shows the inference process using a greedy search.
 \begin{figure}
     \centering
     \includegraphics[width=.8\textwidth]{nmt_inference_scheme}
     \decoRule
-    \caption[Neural Machine Translation inference scheme]{Neural Machine Translation inference \citep{tensorflow.nmt}. \textbf{(a)} \textit{Source input} refers to the input sequence tokenized to let the encoder read it token by token. \textbf{(b)} \textit{Embedding layer} refers to the feedforward neural network language model that creates words' vector representation. \textbf{(c)} \textit{Encoder} refers to stacked LSTMs used to build an abstract representation of the input sequence. \textbf{(d)} \textit{Decoder} refers to stacked LSTMs that produce the output sequence based on the abstract representation built by the encoder and on the $t-1$ output word. \textbf{(e)} \textit{Hidden layers} refer to the number of stacked RNN layers. \textbf{(f)} The \textit{Greedy search} takes the most probable output word at each timestep  \textbf{(g)} \textit{Decoder output} refers to the output sequence tokenized.}
+    \caption[Neural Machine Translation inference scheme]{Neural Machine Translation inference \citep{tensorflow.nmt}. \textbf{(a)} \textit{Source input} refers to the input sequence tokenized to let the encoder read it token by token. \textbf{(b)} \textit{Embedding layer} refers to the feedforward neural network language model that creates words' vector representation. \textbf{(c)} \textit{Encoder} refers to stacked LSTMs used to construct an abstract representation of the input sequence. \textbf{(d)} \textit{Decoder} refers to stacked LSTMs that produce the output sequence based on the abstract representation constructed by the encoder and on the $t-1$ output word. \textbf{(e)} \textit{Hidden layers} refer to the number of stacked RNN layers. \textbf{(f)} The \textit{Greedy search} takes the most probable output word at each timestep  \textbf{(g)} \textit{Decoder output} refers to the output sequence tokenized.}
     \label{fig:nmt-inference}
 \end{figure}
 
@@ -232,7 +233,7 @@ The beam search is computationally more expensive than the greedy search but yie
 
 
 \subsection{Attention mechanism}
-Intuitively, when one translates a sentence, one does not only read the sentence once and straightly translates it. The translation is based on the sentence overall, the translator goes back and forth in the source sentence to give the proper translation. The same intuition applies to conversations.
+Intuitively, when one translates a sentence, one does not only read the sentence once and straightly translates it. The translation is based on the whole sentence, the translator goes back and forth in the source sentence to give the proper translation. The same intuition applies to conversations.
 In basic seq2seq architecture, the model only bases its input data knowledge on the encoder's last hidden state. \citet{1508.04025} proposed a simple method to allow the model to pay attention to what matters at every timestep. They based their work on the research conducted by \citet{1409.0473} that proposed an improvement in seq2seq model performance by allowing ``\textit{the model to automatically (soft)-search for parts of a source sentence that are relevant to predicting a target word}''.
 
 \begin{figure}
@@ -259,7 +260,7 @@ Then, $\bm{\tilde{h}_t}$ is fed through the softmax layer, as showed in Eq.~\ref
 \end{equation}
  The global and local attention models differ on how the context vector $\bm{c}_t$ is derived.
 
- The global attentional model takes into account all the hidden states of the decoder's top layer to produce the context vector $\bm{c}_t$. This model compares the current target hidden $\bm{h}_t$ with each source hidden state $\bm{\bar{h}}_s$ to derive a variable-length alignment vector $\bm{a}_t$ whose size equals the number of time steps on the source side.
+ The global attentional model takes into account all of the hidden states of the decoder's top layer to produce the context vector $\bm{c}_t$. This model compares the current target hidden $\bm{h}_t$ with each source hidden state $\bm{\bar{h}}_s$ to derive a variable-length alignment vector $\bm{a}_t$ whose size equals the number of time steps on the source side.
  $\bm{c}_t$ is then computed as the weighted average over all source states.
  \begin{align}
     \bm{a}_t(s) &= \mathrm{align}(\bm{h}_t, \bm{\bar{h}}_s)\\
@@ -291,7 +292,7 @@ Figure~\ref{fig:atn_global} shows the global attention model.
     \label{fig:atn_global}
 \end{figure}
 
-The local attentional model, proposed by \citet{1508.04025}, uses only a certain window around a position to compute the context vector. In other terms, it does not focus on everything at each timestep. In comparison to the global attentional model, the local attentional model is less expensive since it chooses the subset of the source positions per target word. At each timestep $t$, the context vector is created as a weighted average over the set of source hidden states within the window $[p_t - D, p_t + D]$, $D$ being empirically chosen.
+The local attentional model, proposed by \citet{1508.04025}, uses only a certain window around a position to compute the context vector. In other terms, it does not focus on everything at each timestep. In comparison to the global attentional model, the local attentional model is less expensive since it chooses the subset of the source positions per target word. Let $p_t$ be the alignment position at timestep $t$. At each timestep $t$, the context vector is created as a weighted average over the set of source hidden states within the window $[p_t - D, p_t + D]$, $D$ being empirically chosen.
 This window allows the attentional vector $\bm{a}_t$ to have a fixed size $(\bm{a}_t \in \mathbb{R}^{2D+1})$. The $p_t$ parameter can be set by two different alignment methods. The \textit{monotonic alignment} simply sets $p_t = t$, assuming the source and the target sequences are somewhat aligned. The \textit{predictive alignment} learns and predicts $p_t$ in a form of a single layer feedforward neural network, as shown in Eq.~\ref{equ:atn-pt-local-align}, $S$ being the sentence length, $\mathbf{W}_p$ being the network weights matrix.
 \begin{equation}
     p_t = S \cdot \mathrm{sigmoid} ( \bm{v}_p^T \tanh ( \mathbf{W}_p \bm{h}_t))
@@ -338,8 +339,8 @@ ECM integrates six different emotions categories, namely \textit{Anger, Disgust,
 \end{table}
 
 \subsection{MILABOT for Amazon Alexa Prize Competition}
-Open domain chatbots trained using machine learning algorithms without hand-crafted rules is an ongoing research topic. On this basis, Amazon.com launched in 2016 the Amazon Alexa Prize Competition with the goal of building a socialbot, in other terms, a chatbot being able to discuss nearly anything (e.g. sports, entertainment, politics). \citet{alexa-1709.02349} presented the best chatbot, called MILABOT, capable of having a conversation to about 14 to 16 turns (i.e. a turn is an answer from the user or the chatbot).
-MILABOT is an ensemble-based machine learning system. It has several components that are trained to answer particular questions scored with an internal confidence. All the confidence score of all the modules are evaluated by the dialogue manager to output the most appropriate answer. Figure~\ref{fig:milabot-flow} shows the dialogue manager control flow.
+Open domain chatbots trained using machine learning algorithms without hand-crafted rules is an ongoing research topic. On this basis, Amazon.com launched in 2016 the Amazon Alexa Prize Competition with the goal of constructing a socialbot, in other terms, a chatbot being able to discuss nearly anything (e.g. sports, entertainment, politics). \citet{alexa-1709.02349} presented the best chatbot, called MILABOT, capable of having a conversation to about 14 to 16 turns (i.e. a turn is an answer from the user or the chatbot).
+MILABOT is an ensemble-based machine learning system. It has several components that are trained to answer particular questions scored with an internal confidence. All of the confidence score of all of the modules are evaluated by the dialogue manager to output the most appropriate answer. Figure~\ref{fig:milabot-flow} shows the dialogue manager control flow.
 
 \begin{figure}
     \centering
